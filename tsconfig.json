@@ -1,0 +1,11 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "outDir": "dist",
+        "esModuleInterop": true,
+        "alwaysStrict": true
+    },
+    "include": [
+        "src"
+    ],
+}
