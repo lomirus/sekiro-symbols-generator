@@ -1,10 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import App from './App'
+
 const reactApp = document.querySelector('#react-app');
 
-const App = () => (
-    <div>Hello, World!</div>
-);
-
-ReactDOM.render(App(), reactApp)
+ReactDOM.render(<App />, reactApp)

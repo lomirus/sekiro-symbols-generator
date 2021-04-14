@@ -21,6 +21,9 @@ module.exports = {
         }),
         new ESLintPlugin(),
     ],
+    resolve: {
+        extensions: [".tsx", ".js"]
+    },
     devtool: "source-map",
     devServer: {
         contentBase: "./dist",
