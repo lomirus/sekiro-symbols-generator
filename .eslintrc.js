@@ -21,6 +21,9 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
-        "@typescript-eslint/no-var-requires": 0
+        "@typescript-eslint/no-var-requires": 0,
+        "react/jsx-uses-react": "off", // new JSX transform
+        "react/react-in-jsx-scope": "off", // new JSX transform
+        // "@typescript-eslint/explicit-module-boundary-types": "off"
     }
 };

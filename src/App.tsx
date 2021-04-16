@@ -1,7 +1,8 @@
-import React, { FC } from 'react';
+import { ReactElement } from 'react';
+import MainOptions from './components/options/MainOptions'
 
-const App: FC = () => (
-    <div>Hello, World!</div>
+const App = (): ReactElement => (
+    <MainOptions />
 );
 
 export default App
