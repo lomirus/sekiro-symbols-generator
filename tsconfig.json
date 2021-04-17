@@ -4,7 +4,8 @@
         "outDir": "dist",
         "esModuleInterop": true,
         "alwaysStrict": true,
-        "strict": true
+        "strict": true,
+        "jsxImportSource": "@emotion/react"
     },
     "include": [
         "src"

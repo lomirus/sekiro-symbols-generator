@@ -9,8 +9,11 @@ module.exports = {
         [
             "@babel/preset-react", {
                 "development": process.env.NODE_ENV === "development",
-                "runtime": "automatic"
+                "runtime": "automatic",
+                "importSource": "@emotion/react"
             }
-        ]
-    ]
+        ],
+        "@emotion/babel-preset-css-prop"
+    ],
+    "plugins": ["@emotion"]
 }
