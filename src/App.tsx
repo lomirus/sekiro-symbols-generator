@@ -1,8 +1,12 @@
 import { ReactElement } from 'react';
-import MainOptions from './components/options/MainOptions'
+import Options from './components/Options'
 
 const App = (): ReactElement => (
-    <MainOptions />
+    <div>
+        <Options.Main />
+        <Options.Background />
+        <Options.Size />
+    </div>
 );
 
 export default App

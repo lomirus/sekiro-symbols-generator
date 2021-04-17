@@ -25,13 +25,16 @@ const presets: Array<{
 }]
 
 const MainOptions = (): ReactElement => (
-    <Box title="Main">
-        <div style={{
+    <Box title="Options">
+        {/* <div style={{
             display: "flex",
             flexDirection: "column"
         }}>
             {presets.map(preset => <span key={preset.title}>{preset.symbol}</span>)}
-        </div>
+        </div> */}
+        <select>
+            {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
+        </select>
         <div style={{
             display: "grid",
             gridTemplateColumns: "auto auto"
