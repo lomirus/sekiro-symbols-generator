@@ -13,20 +13,20 @@ const BackgroundOptions = (): ReactElement => (
             alignItems: "center",
         }}>
             <div>
-                <input type="radio" name="background" id="Image" />
-                <label htmlFor="Image">Image</label>
+                <input type="radio" name="background" id="image" />
+                <label htmlFor="image">Image</label>
             </div>
             <FileInput />
 
             <div>
-                <input type="radio" name="background" />
-                <label htmlFor="Color">Color</label>
+                <input type="radio" name="background" id="color" />
+                <label htmlFor="color">Color</label>
             </div>
             <TextInput />
 
             <div>
-                <input type="radio" name="background" />
-                <label htmlFor="None">None</label>
+                <input type="radio" name="background" id="none"/>
+                <label htmlFor="none">None</label>
             </div>
         </div>
     </Box>
