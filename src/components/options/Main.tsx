@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 
+import TextInput from '../TextInput';
 import Box from '../Box';
 
 const presets: Array<{
@@ -33,15 +34,17 @@ const MainOptions = (): ReactElement => (
             {presets.map(preset => <span key={preset.title}>{preset.symbol}</span>)}
         </div> */}
         <select>
-            {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
+            {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
         </select>
         <div style={{
             display: "grid",
-            gridTemplateColumns: "auto auto"
+            gridTemplateColumns: "80px auto",
+            rowGap: "5px",
+            alignItems: "center",
         }}>
-            <span>Symbol</span><input type="text" />
-            <span>Title</span><input type="text" />
-            <span>Color</span><input type="text" />
+            <span>Symbol</span><TextInput />
+            <span>Title</span><TextInput />
+            <span>Color</span><TextInput />
         </div>
     </Box>
 )

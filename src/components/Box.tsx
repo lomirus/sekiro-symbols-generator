@@ -1,3 +1,4 @@
+import { CSSObject } from '@emotion/react';
 import { ReactNode, ReactElement } from 'react';
 
 type BoxProps = {
@@ -5,9 +6,18 @@ type BoxProps = {
     children: ReactNode
 }
 
+const styles: CSSObject = {
+    root: {
+        fontFamily: "Arial",
+    },
+    title: {
+        fontWeight: "normal"
+    }
+}
+
 const Box = ({ title, children }: BoxProps): ReactElement => (
-    <div>
-        <h2>{title}</h2>
+    <div css={styles.root}>
+        <h2 css={styles.title}>{title}</h2>
         {children}
     </div>
 )

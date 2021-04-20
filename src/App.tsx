@@ -1,30 +1,32 @@
-import { ReactElement, CSSProperties } from 'react';
-import Options from './components/Options'
+import { ReactElement } from 'react';
+import * as Options from './components/Options'
+import * as Buttons from './components/Buttons'
 import Preview from './components/Preview'
-import Download from './components/Download'
 
-const styles: Record<string, CSSProperties> = {
+const styles = {
     root: {
-        display: "flex",
-        flexDirection: "column"
+        display: "grid",
+        gridTemplateColumns: "300px 480px",
+        gridTemplateRows: "1fr auto",
+        columnGap: "20px",
+        rowGap: "20px",
+        justifyItems: "center",
     },
-    main: {
-        display: "flex",
-        flexDirection: "row"
+    download: {
+        gridColumnStart: 1,
+        gridColumnEnd: 3
     }
 }
 
 const App = (): ReactElement => (
-    <div style={styles.root}>
-        <div style={styles.main}>
-            <div id="options">
-                <Options.Main />
-                <Options.Background />
-                <Options.Size />
-            </div>
-            <Preview />
+    <div css={styles.root}>
+        <div id="options">
+            <Options.Main />
+            <Options.Background />
+            <Options.Size />
         </div>
-        <Download />
+        <Preview />
+        <Buttons.Download style={styles.download}/>
     </div>
 );
 
