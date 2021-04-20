@@ -1,7 +1,8 @@
 import { ReactElement } from 'react';
+import { CSSObject } from '@emotion/react';
 
 import TextInput from '../TextInput';
-import Box from '../Box';
+import Option from '../Option';
 
 const presets: Array<{
     symbol: string,
@@ -25,39 +26,33 @@ const presets: Array<{
     color: ""
 }]
 
+const Styles: Record<string, CSSObject> = {
+    select: {
+        outline: "none",
+        height: "30px",
+        width: "80px",
+        border: "1px solid #dcdfe6",
+        marginBottom: "15px",
+        borderRadius: "4px",
+    },
+    children: {
+        "&>span": {
+            "userSelect": "none"
+        }
+    }
+}
+
 const MainOptions = (): ReactElement => (
-    <Box title="Options">
-        {/* <div style={{
-            display: "flex",
-            flexDirection: "column"
-        }}>
-            {presets.map(preset => <span key={preset.title}>{preset.symbol}</span>)}
-        </div> */}
-        <select css={{
-            outline: "none",
-            height: "30px",
-            width: "80px",
-            border: "1px solid #dcdfe6",
-            marginBottom: "15px",
-            borderRadius: "4px",
-        }}>
-            {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
-        </select>
-        <div style={{
-            display: "grid",
-            gridTemplateColumns: "80px auto",
-            rowGap: "5px",
-            alignItems: "center",
-        }} css={{
-            "&>span": {
-                "userSelect": "none"
-            }
-        }}>
-            <span>Symbol</span><TextInput />
-            <span>Title</span><TextInput />
-            <span>Color</span><TextInput />
-        </div>
-    </Box>
+    <Option title="Options" childrenStyle={Styles.children}
+        preset={
+            <select css={Styles.select}>
+                {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
+            </select>
+        }>
+        <span>Symbol</span><TextInput />
+        <span>Title</span><TextInput />
+        <span>Color</span><TextInput />
+    </Option>
 )
 
 export default MainOptions

@@ -1,38 +1,29 @@
 import { ReactElement } from 'react';
+import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../Buttons';
-import TextInput from '../TextInput'
-import Box from '../Box';
+import TextInput from '../TextInput';
+import Radio from '../Radio';
+import Option from '../Option';
+
+const Styles: Record<string, CSSObject> = {
+    children: {
+        "& label": {
+            userSelect: "none",
+        }
+    }
+}
 
 const BackgroundOptions = (): ReactElement => (
-    <Box title="Background">
-        <div css={{
-            display: "grid",
-            gridTemplateColumns: "80px auto",
-            rowGap: "5px",
-            alignItems: "center",
-            "& label": {
-                userSelect: "none",
-            }
-        }}>
-            <div>
-                <input type="radio" name="background" id="image" />
-                <label htmlFor="image">Image</label>
-            </div>
-            <FileInput />
+    <Option title="Background" childrenStyle={Styles.children}>
+        <Radio group="background">Image</Radio>
+        <FileInput />
 
-            <div>
-                <input type="radio" name="background" id="color" />
-                <label htmlFor="color">Color</label>
-            </div>
-            <TextInput />
+        <Radio group="background">Color</Radio>
+        <TextInput />
 
-            <div>
-                <input type="radio" name="background" id="none"/>
-                <label htmlFor="none">None</label>
-            </div>
-        </div>
-    </Box>
+        <Radio group="background">None</Radio>
+    </Option>
 )
 
 export default BackgroundOptions

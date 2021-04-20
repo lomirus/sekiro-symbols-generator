@@ -1,23 +1,22 @@
 import { ReactElement } from 'react';
+import { CSSObject } from '@emotion/react';
 
-import Box from '../Box';
+import Option from '../Option';
 import TextInput from '../TextInput';
 
+const Styles: Record<string, CSSObject> = {
+    children: {
+        "&>span": {
+            userSelect: "none",
+        }
+    }
+}
+
 const SizeOptions = (): ReactElement => (
-    <Box title="Size">
-        <div css={{
-            display: "grid",
-            gridTemplateColumns: "80px auto",
-            rowGap: "5px",
-            alignItems: "center",
-            "&>span": {
-                userSelect: "none",
-            }
-        }}>
-            <span>Width</span><TextInput />
-            <span>Height</span><TextInput />
-        </div>
-    </Box>
+    <Option title="Size" childrenStyle={Styles.children}>
+        <span>Width</span><TextInput />
+        <span>Height</span><TextInput />
+    </Option>
 )
 
 export default SizeOptions
