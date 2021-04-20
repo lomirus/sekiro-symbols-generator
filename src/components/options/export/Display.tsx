@@ -43,7 +43,7 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const MainOptions = (): ReactElement => (
-    <Option title="Options" childrenStyle={Styles.children}
+    <Option title="Display" childrenStyle={Styles.children}
         preset={
             <select css={Styles.select}>
                 {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
