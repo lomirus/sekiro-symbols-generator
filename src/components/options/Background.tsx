@@ -6,11 +6,14 @@ import Box from '../Box';
 
 const BackgroundOptions = (): ReactElement => (
     <Box title="Background">
-        <div style={{
+        <div css={{
             display: "grid",
             gridTemplateColumns: "80px auto",
             rowGap: "5px",
             alignItems: "center",
+            "&>label": {
+                userSelect: "none",
+            }
         }}>
             <div>
                 <input type="radio" name="background" id="image" />

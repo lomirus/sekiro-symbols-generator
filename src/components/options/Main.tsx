@@ -33,7 +33,14 @@ const MainOptions = (): ReactElement => (
         }}>
             {presets.map(preset => <span key={preset.title}>{preset.symbol}</span>)}
         </div> */}
-        <select>
+        <select css={{
+            outline: "none",
+            height: "30px",
+            width: "80px",
+            border: "1px solid #dcdfe6",
+            marginBottom: "15px",
+            borderRadius: "4px",
+        }}>
             {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
         </select>
         <div style={{
@@ -41,6 +48,10 @@ const MainOptions = (): ReactElement => (
             gridTemplateColumns: "80px auto",
             rowGap: "5px",
             alignItems: "center",
+        }} css={{
+            "&>span": {
+                "userSelect": "none"
+            }
         }}>
             <span>Symbol</span><TextInput />
             <span>Title</span><TextInput />
