@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import TextInput from '../TextInput';
+import { Text as TextInput } from '../Inputs'
 import Option from '../Option';
 
 const presets: Array<{

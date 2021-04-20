@@ -1,9 +1,8 @@
 import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import { FileInput } from '../Buttons';
-import TextInput from '../TextInput';
-import Radio from '../Radio';
+import { FileInput } from '../../Buttons';
+import { Text as TextInput, Radio } from '../Inputs'
 import Option from '../Option';
 
 const Styles: Record<string, CSSObject> = {
