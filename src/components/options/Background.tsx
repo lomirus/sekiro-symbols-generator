@@ -11,7 +11,7 @@ const BackgroundOptions = (): ReactElement => (
             gridTemplateColumns: "80px auto",
             rowGap: "5px",
             alignItems: "center",
-            "&>label": {
+            "& label": {
                 userSelect: "none",
             }
         }}>
