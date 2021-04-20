@@ -17,8 +17,8 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./src/index.html",
-            favicon: "./src/favicon.ico"
+            template: "./src/template/index.html",
+            favicon: "./src/template/favicon.ico"
         }),
         new ESLintPlugin(),
     ],
