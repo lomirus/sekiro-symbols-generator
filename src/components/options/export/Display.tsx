@@ -51,7 +51,7 @@ const MainOptions = (): ReactElement => (
         }>
         <span>Symbol</span><TextInput placeholder="忍殺" />
         <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" />
-        <span>Color</span><TextInput placeholder="FFFFFF" />
+        <span>Color</span><TextInput prefix="#" placeholder="FFFFFF" />
     </Option>
 )
 
