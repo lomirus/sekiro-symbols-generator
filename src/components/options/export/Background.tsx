@@ -19,9 +19,9 @@ const BackgroundOptions = (): ReactElement => (
         <FileInput />
 
         <Radio group="background">Color</Radio>
-        <TextInput />
+        <TextInput placeholder="0000000"/>
 
-        <Radio group="background">None</Radio>
+        <Radio group="background" checked={true}>None</Radio>
     </Option>
 )
 

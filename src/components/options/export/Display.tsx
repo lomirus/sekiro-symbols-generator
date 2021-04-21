@@ -19,7 +19,7 @@ const presets: Array<{
 }, {
     symbol: "忍殺",
     title: "SHINOBI EXECUTION",
-    color: ""
+    color: "FFFFFF"
 }, {
     symbol: "不死斬り",
     title: "",
@@ -46,12 +46,12 @@ const MainOptions = (): ReactElement => (
     <Option title="Display" childrenStyle={Styles.children}
         preset={
             <select css={Styles.select}>
-                {presets.map(preset => <option key={preset.title}>{preset.color}</option>)}
+                {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
             </select>
         }>
-        <span>Symbol</span><TextInput />
-        <span>Title</span><TextInput />
-        <span>Color</span><TextInput />
+        <span>Symbol</span><TextInput placeholder="忍殺" />
+        <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" />
+        <span>Color</span><TextInput placeholder="FFFFFF" />
     </Option>
 )
 

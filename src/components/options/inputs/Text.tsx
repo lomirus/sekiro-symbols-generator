@@ -12,8 +12,12 @@ const TextInputStyle: CSSObject = {
     }
 }
 
-const TextInput = (): ReactElement => (
-    <input type="text" css={TextInputStyle}/>
+type TextInputProps = {
+    placeholder?: string
+}
+
+const TextInput = ({ placeholder }: TextInputProps): ReactElement => (
+    <input type="text" placeholder={placeholder} css={TextInputStyle}/>
 )
 
 export default TextInput;
