@@ -1,5 +1,4 @@
 import { ReactElement } from 'react';
-import { CSSObject } from '@emotion/react';
 
 type RadioProps = {
     group: string,
