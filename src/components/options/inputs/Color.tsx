@@ -9,8 +9,12 @@ const colorInputStyle: CSSObject = {
     }
 }
 
-const ColorInput = (): ReactElement => (
-    <input type="color" css={colorInputStyle} />
+type ColorInputProps = {
+    value: string
+}
+
+const ColorInput = ({ value }: ColorInputProps): ReactElement => (
+    <input type="color" value={value} css={colorInputStyle} />
 )
 
 
