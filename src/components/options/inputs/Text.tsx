@@ -29,16 +29,17 @@ const Styles: Record<string, CSSObject> = {
 type TextInputProps = {
     prefix?: string,
     placeholder?: string,
-    numeric?: boolean
+    numeric?: boolean,
+    minNumber?: number,
 }
 
-const TextInput = ({ prefix, placeholder, numeric }: TextInputProps): ReactElement => {
+const TextInput = ({ prefix, placeholder, numeric, minNumber }: TextInputProps): ReactElement => {
     const input = useRef<HTMLInputElement>(null)
     const focusInput = () => input.current?.focus()
     return (
         <div css={Styles.root} onClick={focusInput}>
             {prefix ? <span className="prefix" css={Styles.prefix}>{prefix}</span> : null}
-            <input type={ numeric ? "number" : "text"} placeholder={placeholder} css={Styles.textInput} ref={input} />
+            <input type={ numeric ? "number" : "text"} min={minNumber} placeholder={placeholder} css={Styles.textInput} ref={input} />
         </div>
     )
 }
