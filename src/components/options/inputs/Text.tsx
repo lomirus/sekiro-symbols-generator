@@ -15,7 +15,8 @@ const Styles: Record<string, CSSObject> = {
         }
     },
     prefix: {
-        marginRight: "5px"
+        marginRight: "5px",
+        userSelect: "none",
     },
     textInput: {
         outline: "none",
