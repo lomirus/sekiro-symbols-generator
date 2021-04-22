@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { CSSObject } from '@emotion/react';
 
 type RadioProps = {
     group: string,
@@ -8,8 +9,9 @@ type RadioProps = {
 
 const Radio = ({ group, children, checked }: RadioProps): ReactElement => (
     <div>
-        <input type="radio" name={group} id={children} defaultChecked={checked}/>
-        <label htmlFor={children}>{children}</label>
+        <input type="radio" name={group} id={children}
+            defaultChecked={checked} css={{cursor: "pointer"}} />
+        <label htmlFor={children} css={{cursor: "pointer"}}>{children}</label>
     </div>
 )
 
