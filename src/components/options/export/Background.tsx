@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../../Buttons';
-import { Text as TextInput, Radio } from '../Inputs'
+import { Text as TextInput, Color as ColorInput, Radio } from '../Inputs'
 import Option from '../Option';
 
 const Styles: Record<string, CSSObject> = {
@@ -19,7 +19,7 @@ const BackgroundOptions = (): ReactElement => (
         <FileInput />
 
         <Radio group="background">Color</Radio>
-        <TextInput prefix="#" placeholder="000000"/>
+        <ColorInput />
 
         <Radio group="background" checked={true}>None</Radio>
     </Option>

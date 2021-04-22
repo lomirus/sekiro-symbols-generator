@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import { Text as TextInput } from '../Inputs'
+import { Text as TextInput, Color as ColorInput } from '../Inputs'
 import Option from '../Option';
 
 const presets: Array<{
@@ -51,7 +51,7 @@ const MainOptions = (): ReactElement => (
         }>
         <span>Symbol</span><TextInput placeholder="忍殺" />
         <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" />
-        <span>Color</span><TextInput prefix="#" placeholder="FFFFFF" />
+        <span>Color</span><ColorInput />
     </Option>
 )
 
