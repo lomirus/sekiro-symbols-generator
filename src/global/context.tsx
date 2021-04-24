@@ -1,7 +1,6 @@
-import { Dispatch, createContext } from 'react';
-import { textType, actionType } from './types'
+import { createContext } from 'react';
+import { contextType } from './types'
 
-// const OptionContext = createContext(useReducer(reducer, {} as text));
-const OptionContext = createContext<[textType, Dispatch<actionType>]>({} as [textType, Dispatch<actionType>])
+const Context = createContext<contextType>({} as contextType)
 
-export default OptionContext
+export default Context

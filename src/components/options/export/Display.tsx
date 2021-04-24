@@ -3,7 +3,7 @@ import { CSSObject } from '@emotion/react';
 
 import { Text as TextInput, Color as ColorInput } from '../Inputs'
 import Option from '../Option';
-import OptionContext from '../../../global/context'
+import Context from '../../../global/context'
 
 type text = {
     symbol: string,
@@ -54,34 +54,33 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const MainOptions = (): ReactElement => {
-    //const [nowText, setNowText] = useState<text>()
-    const [nowText, dispatchText] = useContext(OptionContext)
-    const select = useRef<HTMLSelectElement>(null)
+    const [textState, dispatchText] = useContext(Context)
+    const selector = useRef<HTMLSelectElement>(null)
     const handleSelect = () => {
-        const newText = presets[select.current?.selectedIndex??0]
+        const newTextState = presets[selector.current?.selectedIndex??0]
         dispatchText({
             type: 'SYMBOL',
-            payload: newText.symbol
+            payload: newTextState.symbol
         })
         dispatchText({
             type: 'TITLE',
-            payload: newText.title
+            payload: newTextState.title
         })
         dispatchText({
             type: 'COLOR',
-            payload: newText.color
+            payload: newTextState.color
         })
     }
     return (
         <Option title="Display" childrenStyle={Styles.children}
             preset={
-                <select css={Styles.select} ref={select} onChange={handleSelect}>
+                <select css={Styles.select} ref={selector} onChange={handleSelect}>
                     {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
                 </select>
             }>
-            <span>Symbol</span><TextInput placeholder="忍殺" value={nowText?.symbol} />
-            <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" value={nowText?.title} />
-            <span>Color</span><ColorInput value={nowText?.color??'#FFFFFF'} />
+            <span>Symbol</span><TextInput placeholder="忍殺" value={textState?.symbol} />
+            <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} />
+            <span>Color</span><ColorInput value={textState?.color??'#FFFFFF'} />
         </Option>
     )
 }

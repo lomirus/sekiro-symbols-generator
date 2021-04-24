@@ -1,9 +1,10 @@
 import { useReducer, ReactElement } from 'react';
+
 import * as Options from './components/Options'
 import * as Buttons from './components/Buttons'
 import Preview from './components/Preview'
+
 import Context from './global/context'
-import { textType } from './global/types'
 import reducer from './global/reducer'
 
 const styles = {
@@ -22,7 +23,7 @@ const styles = {
 }
 
 const App = (): ReactElement => (
-    <Context.Provider value={useReducer(reducer, {} as textType)}>
+    <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '' })}>
         <div css={styles.root}>
             <div id="options">
                 <Options.Display />
