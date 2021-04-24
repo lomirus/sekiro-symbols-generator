@@ -11,19 +11,27 @@ const presets: Array<{
 }> = [{
     symbol: "死",
     title: "DEATH",
-    color: ""
+    color: "A72C2A"
 }, {
     symbol: "冥助あり",
     title: "UNSEEN AID",
-    color: ""
+    color: "A0C6FF" // approximate
+}, {
+    symbol: "鬼仏見出",
+    title: "SCULPTOR'S IDOL FOUND",
+    color: "FFFFC0" // approximate
+}, {
+    symbol: "竜咳快復",
+    title: "DRAGONROT HEALED",
+    color: "F0C6C8" // approximate
 }, {
     symbol: "忍殺",
     title: "SHINOBI EXECUTION",
     color: "FFFFFF"
 }, {
     symbol: "不死斬り",
-    title: "",
-    color: ""
+    title: "IMMORTALITY SEVERED",
+    color: "FFFFFF"
 }]
 
 const Styles: Record<string, CSSObject> = {
@@ -51,7 +59,7 @@ const MainOptions = (): ReactElement => (
         }>
         <span>Symbol</span><TextInput placeholder="忍殺" />
         <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" />
-        <span>Color</span><ColorInput value="#FFFFFF"/>
+        <span>Color</span><ColorInput value="#FFFFFF" />
     </Option>
 )
 
