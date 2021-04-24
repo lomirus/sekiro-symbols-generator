@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext, ChangeEventHandler } from 'react';
 import { CSSObject } from '@emotion/react';
 
 const colorInputStyle: CSSObject = {
@@ -10,12 +10,15 @@ const colorInputStyle: CSSObject = {
 }
 
 type ColorInputProps = {
-    value: string
+    value: string,
+    onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
-const ColorInput = ({ value }: ColorInputProps): ReactElement => (
-    <input type="color" value={value} css={colorInputStyle} onChange={() => {/**/}} />
-)
+const ColorInput = ({ value, onChange }: ColorInputProps): ReactElement => {
+    return (
+        <input type="color" value={value} css={colorInputStyle} onChange={onChange} />
+    )
+}
 
 
 export default ColorInput;

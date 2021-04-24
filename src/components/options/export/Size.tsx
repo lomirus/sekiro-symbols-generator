@@ -14,8 +14,10 @@ const Styles: Record<string, CSSObject> = {
 
 const SizeOptions = (): ReactElement => (
     <Option title="Size" childrenStyle={Styles.children}>
-        <span>Width</span><TextInput numeric={true} minNumber={0} placeholder="1920" />
-        <span>Height</span><TextInput numeric={true} minNumber={0} placeholder="1080" />
+        <span>Width</span>
+        <TextInput numeric={true} minNumber={0} placeholder="1920" onChange={() => {/**/}} />
+        <span>Height</span>
+        <TextInput numeric={true} minNumber={0} placeholder="1080"  onChange={() => {/**/}} />
     </Option>
 )
 

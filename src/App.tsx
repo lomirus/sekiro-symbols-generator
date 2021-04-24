@@ -23,7 +23,7 @@ const styles = {
 }
 
 const App = (): ReactElement => (
-    <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '' })}>
+    <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '#000000' })}>
         <div css={styles.root}>
             <div id="options">
                 <Options.Display />

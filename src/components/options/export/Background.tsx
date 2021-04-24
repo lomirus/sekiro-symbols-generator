@@ -19,7 +19,7 @@ const BackgroundOptions = (): ReactElement => (
         <FileInput />
 
         <Radio group="background">Color</Radio>
-        <ColorInput value="#000000"/>
+        <ColorInput value="#000000" onChange={() => {/**/}}/>
 
         <Radio group="background" checked={true}>None</Radio>
     </Option>

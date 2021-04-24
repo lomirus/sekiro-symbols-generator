@@ -1,4 +1,4 @@
-import { useRef, ReactElement } from 'react';
+import { useRef, ReactElement, ChangeEventHandler } from 'react';
 import { CSSObject } from '@emotion/react';
 
 const Styles: Record<string, CSSObject> = {
@@ -31,17 +31,25 @@ type TextInputProps = {
     placeholder?: string,
     numeric?: boolean,
     minNumber?: number,
-    value?: string
+    value?: string,
+    onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
-const TextInput = ({ prefix, placeholder, numeric, minNumber, value }: TextInputProps): ReactElement => {
+const TextInput = ({ prefix, placeholder, numeric, minNumber, value, onChange }: TextInputProps): ReactElement => {
     const input = useRef<HTMLInputElement>(null)
     const focusInput = () => input.current?.focus()
     return (
         <div css={Styles.root} onClick={focusInput}>
             {prefix ? <span className="prefix" css={Styles.prefix}>{prefix}</span> : null}
-            <input type={numeric ? "number" : "text"} value={value??''} onChange={() => {/**/}}
-                min={minNumber} placeholder={placeholder} css={Styles.textInput} ref={input} />
+            <input
+                ref={input}
+                min={minNumber}
+                value={value ?? ''}
+                css={Styles.textInput}
+                onChange={onChange}
+                placeholder={placeholder}
+                type={numeric ? "number" : "text"}>
+            </input>
         </div>
     )
 }

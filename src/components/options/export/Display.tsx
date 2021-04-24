@@ -1,4 +1,4 @@
-import { useRef, useContext, ReactElement } from 'react';
+import { useRef, useContext, ReactElement, ChangeEventHandler } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { Text as TextInput, Color as ColorInput } from '../Inputs'
@@ -71,6 +71,25 @@ const MainOptions = (): ReactElement => {
             payload: newTextState.color
         })
     }
+
+    const onSymbolChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        dispatchText({
+            type: 'SYMBOL',
+            payload: e.target.value
+        })
+    }
+    const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        dispatchText({
+            type: 'TITLE',
+            payload: e.target.value
+        })
+    }
+    const onColorChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        dispatchText({
+            type: 'COLOR',
+            payload: e.target.value
+        })
+    }
     return (
         <Option title="Display" childrenStyle={Styles.children}
             preset={
@@ -78,9 +97,14 @@ const MainOptions = (): ReactElement => {
                     {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
                 </select>
             }>
-            <span>Symbol</span><TextInput placeholder="忍殺" value={textState?.symbol} />
-            <span>Title</span><TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} />
-            <span>Color</span><ColorInput value={textState?.color??'#FFFFFF'} />
+            <span>Symbol</span>
+            <TextInput placeholder="忍殺" value={textState?.symbol} onChange={onSymbolChange}/>
+
+            <span>Title</span>
+            <TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} onChange={onTitleChange}/>
+
+            <span>Color</span>
+            <ColorInput value={textState.color} onChange={onColorChange}/>
         </Option>
     )
 }
