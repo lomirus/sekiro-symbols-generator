@@ -1,8 +1,9 @@
-import { useState, useRef, ReactElement } from 'react';
+import { useRef, useContext, ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { Text as TextInput, Color as ColorInput } from '../Inputs'
 import Option from '../Option';
+import OptionContext from '../../../global/context'
 
 type text = {
     symbol: string,
@@ -53,10 +54,23 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const MainOptions = (): ReactElement => {
-    const [nowText, setNowText] = useState<text>()
+    //const [nowText, setNowText] = useState<text>()
+    const [nowText, dispatchText] = useContext(OptionContext)
     const select = useRef<HTMLSelectElement>(null)
     const handleSelect = () => {
-        setNowText(presets[select.current?.selectedIndex??0])
+        const newText = presets[select.current?.selectedIndex??0]
+        dispatchText({
+            type: 'SYMBOL',
+            payload: newText.symbol
+        })
+        dispatchText({
+            type: 'TITLE',
+            payload: newText.title
+        })
+        dispatchText({
+            type: 'COLOR',
+            payload: newText.color
+        })
     }
     return (
         <Option title="Display" childrenStyle={Styles.children}

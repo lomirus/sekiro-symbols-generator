@@ -1,7 +1,10 @@
-import { ReactElement } from 'react';
+import { useReducer, ReactElement } from 'react';
 import * as Options from './components/Options'
 import * as Buttons from './components/Buttons'
 import Preview from './components/Preview'
+import Context from './global/context'
+import { textType } from './global/types'
+import reducer from './global/reducer'
 
 const styles = {
     root: {
@@ -19,15 +22,17 @@ const styles = {
 }
 
 const App = (): ReactElement => (
-    <div css={styles.root}>
-        <div id="options">
-            <Options.Display />
-            <Options.Background />
-            <Options.Size />
+    <Context.Provider value={useReducer(reducer, {} as textType)}>
+        <div css={styles.root}>
+            <div id="options">
+                <Options.Display />
+                <Options.Background />
+                <Options.Size />
+            </div>
+            <Preview />
+            <Buttons.Download style={styles.download} />
         </div>
-        <Preview />
-        <Buttons.Download style={styles.download}/>
-    </div>
+    </Context.Provider>
 );
 
 export default App
