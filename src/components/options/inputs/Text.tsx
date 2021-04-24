@@ -31,15 +31,17 @@ type TextInputProps = {
     placeholder?: string,
     numeric?: boolean,
     minNumber?: number,
+    value?: string
 }
 
-const TextInput = ({ prefix, placeholder, numeric, minNumber }: TextInputProps): ReactElement => {
+const TextInput = ({ prefix, placeholder, numeric, minNumber, value }: TextInputProps): ReactElement => {
     const input = useRef<HTMLInputElement>(null)
     const focusInput = () => input.current?.focus()
     return (
         <div css={Styles.root} onClick={focusInput}>
             {prefix ? <span className="prefix" css={Styles.prefix}>{prefix}</span> : null}
-            <input type={ numeric ? "number" : "text"} min={minNumber} placeholder={placeholder} css={Styles.textInput} ref={input} />
+            <input type={numeric ? "number" : "text"} value={value??''} onChange={() => {/**/}}
+                min={minNumber} placeholder={placeholder} css={Styles.textInput} ref={input} />
         </div>
     )
 }
