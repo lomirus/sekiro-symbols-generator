@@ -14,7 +14,7 @@ type ColorInputProps = {
 }
 
 const ColorInput = ({ value }: ColorInputProps): ReactElement => (
-    <input type="color" value={value} css={colorInputStyle} />
+    <input type="color" defaultValue={value} css={colorInputStyle} />
 )
 
 
