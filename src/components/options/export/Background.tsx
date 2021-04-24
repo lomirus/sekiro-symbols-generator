@@ -2,7 +2,7 @@ import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../../Buttons';
-import { Text as TextInput, Color as ColorInput, Radio } from '../Inputs'
+import { Color as ColorInput, Radio } from '../Inputs'
 import Option from '../Option';
 
 const Styles: Record<string, CSSObject> = {
