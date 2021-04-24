@@ -2,12 +2,20 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+const PRODUCTION = process.env.NODE_ENV === 'production'
+
 module.exports = {
-    mode: process.env.NODE_ENV,
-    entry: "./src/index.tsx",
+    mode: PRODUCTION ? 'production' : 'development',
+    entry: {
+        app: {
+            import: "./src/index.tsx",
+            dependOn: "react-vendors"
+        },
+        'react-vendors': ['react', 'react-dom']
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "bundle.js"
+        filename: "[name].js"
     },
     module: {
         rules: [{
@@ -25,7 +33,7 @@ module.exports = {
     resolve: {
         extensions: [".tsx", ".js"]
     },
-    devtool: "source-map",
+    devtool: PRODUCTION ? "source-map" : "eval-source-map",
     devServer: {
         contentBase: "./dist",
         open: true
