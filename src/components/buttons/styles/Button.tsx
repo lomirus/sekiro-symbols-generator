@@ -11,6 +11,7 @@ const ButtonStyle: CSSObject = {
 
     cursor: "pointer",
     outline: "none",
+    userSelect: "none",
 
     transition: ".1s",
     "&:hover": {
