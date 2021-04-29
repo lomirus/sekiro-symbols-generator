@@ -14,14 +14,44 @@ const HEIGHT = 640, WIDTH = 540
 
 const Preview = ({ text }: PreviewProps): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
+    let ctx: CanvasRenderingContext2D;
 
     useEffect(() => {
-        const ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
-        drawBackground(ctx, '#000000')
-        drawText(ctx, text.symbol, stretch(text.title), text.color)
+        ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
+        drawBackground('#000000')
+        drawText(text.symbol, stretch(text.title), text.color)
     })
 
-    const stretch = (oldText: string): string => oldText.split('').join(' ')
+    function drawBackground(color: string) {
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, WIDTH, HEIGHT)
+    }
+    
+    function drawText(symbol: string, title: string, color: string) {
+        ctx.fillStyle = color;
+        const fontSize = 96
+        const top = HEIGHT / 2 + symbol.length * fontSize / 2
+        drawSymbol(symbol, fontSize)
+        drawTitle(title, top)
+    }
+    
+    function drawSymbol(text: string, fontSize: number) {
+        const fontFamily = ['symbol', '宋体']
+        ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
+        ctx.textAlign = 'center'
+        let y = HEIGHT / 2 - text.length * fontSize / 2
+        text.split('').forEach(symbol => {
+            ctx.fillText(symbol, WIDTH / 2, y)
+            y += fontSize
+        })
+    }
+    
+    function drawTitle(title: string, top: number) {
+        const fontSize = 28
+        ctx.font = `${fontSize}px serif`
+        ctx.textAlign = 'center'
+        ctx.fillText(title, WIDTH / 2, top)
+    }
 
     return (
         <canvas id="preview" ref={canvas}
@@ -30,36 +60,10 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
     )
 }
 
-function drawBackground(ctx: CanvasRenderingContext2D, color: string) {
-    ctx.fillStyle = color;
-    ctx.fillRect(0, 0, WIDTH, HEIGHT)
-}
+const stretch = (oldText: string): string => oldText.split('').join(' ')
 
-function drawText(ctx: CanvasRenderingContext2D, symbol: string, title: string, color: string) {
-    ctx.fillStyle = color;
-    const fontSize = 96
-    const top = HEIGHT / 2 + symbol.length * fontSize / 2
-    drawSymbol(ctx, symbol, fontSize)
-    drawTitle(ctx, title, top)
-}
 
-function drawSymbol(ctx: CanvasRenderingContext2D, text: string, fontSize: number) {
-    const fontFamily = ['symbol', '宋体']
-    ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
-    ctx.textAlign = 'center'
-    let y = HEIGHT / 2 - text.length * fontSize / 2
-    text.split('').forEach(symbol => {
-        ctx.fillText(symbol, WIDTH / 2, y)
-        y += fontSize
-    })
-}
 
-function drawTitle(ctx: CanvasRenderingContext2D, title: string, top: number) {
-    const fontSize = 28
-    ctx.font = `${fontSize}px serif`
-    ctx.textAlign = 'center'
-    ctx.fillText(title, WIDTH / 2, top)
-}
 
 
 export default Preview
