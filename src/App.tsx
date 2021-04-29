@@ -39,7 +39,7 @@ const App = (): ReactElement => {
 
 const ContextApp = (): ReactElement => {
     return (
-        <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '#000000' })}>
+        <Context.Provider value={useReducer(reducer, { symbol: ' ', title: ' ', color: '#FFFFFF' })}>
             <App />
         </Context.Provider>
     )

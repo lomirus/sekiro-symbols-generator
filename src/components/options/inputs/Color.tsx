@@ -1,4 +1,4 @@
-import { ReactElement, useContext, ChangeEventHandler } from 'react';
+import { ReactElement, ChangeEventHandler } from 'react';
 import { CSSObject } from '@emotion/react';
 
 const colorInputStyle: CSSObject = {

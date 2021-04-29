@@ -21,11 +21,6 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
         drawText(ctx, text.symbol, stretch(text.title), text.color)
     })
 
-    useEffect(() => {
-        const ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
-        drawText(ctx, ' ', ' ', text.color)
-    }, [])
-
     const stretch = (oldText: string): string => oldText.split('').join(' ')
 
     return (
