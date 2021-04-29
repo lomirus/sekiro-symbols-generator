@@ -1,5 +1,10 @@
 import { useRef, useEffect, ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
+import { textType } from '../global/types'
+
+type PreviewProps = {
+    text: textType
+}
 
 const canvasStyle: CSSObject = {
     border: "1px solid #DCDFE6",
@@ -7,15 +12,14 @@ const canvasStyle: CSSObject = {
 
 const HEIGHT = 540, WIDTH = 480
 
-const Preview = (): ReactElement => {
+const Preview = ({ text }: PreviewProps): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
-    let ctx: CanvasRenderingContext2D
 
     useEffect(() => {
-        ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
+        const ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
         drawBackground(ctx, '#000000')
-        drawText(ctx, '忍殺', 'SHINOBI EXECUTION')
-    }, [])
+        drawText(ctx, text.symbol, text.title, text.color)
+    })
 
     return (
         <canvas id="preview" ref={canvas}
@@ -29,7 +33,7 @@ function drawBackground(ctx: CanvasRenderingContext2D, color: string) {
     ctx.fillRect(0, 0, WIDTH, HEIGHT)
 }
 
-function drawText(ctx: CanvasRenderingContext2D, symbol: string, title: string, color = '#FFFFFF') {
+function drawText(ctx: CanvasRenderingContext2D, symbol: string, title: string, color: string) {
     ctx.fillStyle = color;
     const fontSize = 96
     const top = HEIGHT / 2 + symbol.length * fontSize / 2

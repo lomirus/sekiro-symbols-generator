@@ -1,4 +1,4 @@
-import { useReducer, ReactElement } from 'react';
+import { useContext, useReducer, ReactElement } from 'react';
 
 import * as Options from './components/Options'
 import * as Buttons from './components/Buttons'
@@ -22,18 +22,27 @@ const styles = {
     }
 }
 
-const App = (): ReactElement => (
-    <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '#000000' })}>
+const App = (): ReactElement => {
+    const textState = useContext(Context)[0]
+    return (
         <div css={styles.root}>
             <div id="options">
                 <Options.Display />
                 <Options.Background />
                 <Options.Size />
             </div>
-            <Preview />
+            <Preview text={textState} />
             <Buttons.Download style={styles.download} />
         </div>
-    </Context.Provider>
-);
+    )
+}
 
-export default App
+const ContextApp = (): ReactElement => {
+    return (
+        <Context.Provider value={useReducer(reducer, { symbol: '', title: '', color: '#000000' })}>
+            <App />
+        </Context.Provider>
+    )
+}
+
+export default ContextApp
