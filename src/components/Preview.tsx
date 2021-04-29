@@ -10,7 +10,7 @@ const canvasStyle: CSSObject = {
     border: "1px solid #DCDFE6",
 }
 
-const HEIGHT = 540, WIDTH = 480
+const HEIGHT = 640, WIDTH = 540
 
 const Preview = ({ text }: PreviewProps): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
