@@ -21,6 +21,11 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
         drawText(ctx, text.symbol, stretch(text.title), text.color)
     })
 
+    useEffect(() => {
+        const ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
+        drawText(ctx, ' ', ' ', text.color)
+    }, [])
+
     const stretch = (oldText: string): string => oldText.split('').join(' ')
 
     return (
@@ -44,8 +49,8 @@ function drawText(ctx: CanvasRenderingContext2D, symbol: string, title: string, 
 }
 
 function drawSymbol(ctx: CanvasRenderingContext2D, text: string, fontSize: number) {
-    const fontFamily = ['"EPSON 太行書体Ｂ"', '宋体']
-    ctx.font = `${fontSize}px ${fontFamily.join(',')}`
+    const fontFamily = ['symbol', '宋体']
+    ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
     ctx.textAlign = 'center'
     let y = HEIGHT / 2 - text.length * fontSize / 2
     text.split('').forEach(symbol => {
