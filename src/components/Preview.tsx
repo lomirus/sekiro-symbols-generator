@@ -18,8 +18,10 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
     useEffect(() => {
         const ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
         drawBackground(ctx, '#000000')
-        drawText(ctx, text.symbol, text.title, text.color)
+        drawText(ctx, text.symbol, stretch(text.title), text.color)
     })
+
+    const stretch = (oldText: string): string => oldText.split('').join(' ')
 
     return (
         <canvas id="preview" ref={canvas}
