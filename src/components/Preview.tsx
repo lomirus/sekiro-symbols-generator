@@ -29,8 +29,8 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
     
     function drawText(symbol: string, title: string, color: string) {
         ctx.fillStyle = color;
-        const fontSize = 96
-        const top = HEIGHT / 2 + symbol.length * fontSize / 2
+        const fontSize = symbol.length === 1 ? 180 : 100
+        const top = HEIGHT / 2 + symbol.length * fontSize / 2 - 24
         drawSymbol(symbol, fontSize)
         drawTitle(title, top)
     }
@@ -39,7 +39,8 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
         const fontFamily = ['symbol', '宋体']
         ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
         ctx.textAlign = 'center'
-        let y = HEIGHT / 2 - text.length * fontSize / 2
+        ctx.textBaseline = 'top'
+        let y = HEIGHT / 2 - text.length * fontSize / 2 - 48
         text.split('').forEach(symbol => {
             ctx.fillText(symbol, WIDTH / 2, y)
             y += fontSize
@@ -50,6 +51,7 @@ const Preview = ({ text }: PreviewProps): ReactElement => {
         const fontSize = 28
         ctx.font = `${fontSize}px serif`
         ctx.textAlign = 'center'
+        ctx.textBaseline = 'top'
         ctx.fillText(title, WIDTH / 2, top)
     }
 
