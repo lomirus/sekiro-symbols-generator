@@ -24,6 +24,14 @@ const presets: Array<text> = [{
     title: "INNER REFLECTION CONQUERED",
     color: "#FFFFFF"
 }, {
+    symbol: "厄憑",
+    title: "SINISTER BURDEN",
+    color: "#750025"
+}, {
+    symbol: "厄払",
+    title: "BURDEN DISPELLED",
+    color: "#FFFFFF"
+}, {
     symbol: "不死斬り",
     title: "IMMORTALITY SEVERED",
     color: "#FFFFFF"
