@@ -10,7 +10,7 @@ import reducer from './global/reducer'
 const styles = {
     root: {
         display: "grid",
-        gridTemplateColumns: "300px 540px",
+        gridTemplateColumns: "300px auto",
         gridTemplateRows: "1fr auto",
         columnGap: "20px",
         rowGap: "20px",
