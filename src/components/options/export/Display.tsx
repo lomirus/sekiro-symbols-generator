@@ -16,6 +16,18 @@ const presets: Array<text> = [{
     title: "DEATH",
     color: "#A72C2A"
 }, {
+    symbol: "忍殺",
+    title: "SHINOBI EXECUTION",
+    color: "#FFFFFF"
+}, {
+    symbol: "踏破",
+    title: "INNER REFLECTION CONQUERED",
+    color: "#FFFFFF"
+}, {
+    symbol: "不死斬り",
+    title: "IMMORTALITY SEVERED",
+    color: "#FFFFFF"
+}, {
     symbol: "冥助あり",
     title: "UNSEEN AID",
     color: "#A0C6FF" // approximate
@@ -27,14 +39,6 @@ const presets: Array<text> = [{
     symbol: "竜咳快復",
     title: "DRAGONROT HEALED",
     color: "#F0C6C8" // approximate
-}, {
-    symbol: "忍殺",
-    title: "SHINOBI EXECUTION",
-    color: "#FFFFFF"
-}, {
-    symbol: "不死斬り",
-    title: "IMMORTALITY SEVERED",
-    color: "#FFFFFF"
 }]
 
 const Styles: Record<string, CSSObject> = {
@@ -57,7 +61,7 @@ const MainOptions = (): ReactElement => {
     const [textState, dispatchText] = useContext(Context)
     const selector = useRef<HTMLSelectElement>(null)
     const handleSelect = () => {
-        const newTextState = presets[selector.current?.selectedIndex??0]
+        const newTextState = presets[selector.current?.selectedIndex ?? 0]
         dispatchText({
             type: 'SYMBOL',
             payload: newTextState.symbol
@@ -98,13 +102,13 @@ const MainOptions = (): ReactElement => {
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput placeholder="忍殺" value={textState?.symbol} onChange={onSymbolChange}/>
+            <TextInput placeholder="忍殺" value={textState?.symbol} onChange={onSymbolChange} />
 
             <span>Title</span>
-            <TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} onChange={onTitleChange}/>
+            <TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} onChange={onTitleChange} />
 
             <span>Color</span>
-            <ColorInput value={textState.color} onChange={onColorChange}/>
+            <ColorInput value={textState.color} onChange={onColorChange} />
         </Option>
     )
 }
