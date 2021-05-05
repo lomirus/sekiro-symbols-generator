@@ -2,8 +2,8 @@ import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../../Buttons';
-import { Color as ColorInput, Radio } from '../Inputs'
 import Option from '../Option';
+import TextInput from '../inputs/Text';
 
 const Styles: Record<string, CSSObject> = {
     children: {
@@ -15,13 +15,11 @@ const Styles: Record<string, CSSObject> = {
 
 const BackgroundOptions = (): ReactElement => (
     <Option title="Background" childrenStyle={Styles.children}>
-        <Radio group="background">Image</Radio>
+        <label>Image</label>
         <FileInput />
 
-        <Radio group="background">Color</Radio>
-        <ColorInput value="#000000" onChange={() => {/**/}}/>
-
-        <Radio group="background" checked={true}>None</Radio>
+        <label>Opacity</label>
+        <TextInput value="100" minNumber={0} maxNumber={100} numeric={true} onChange={() => {/**/}}/>
     </Option>
 )
 

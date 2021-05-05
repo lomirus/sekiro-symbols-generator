@@ -31,11 +31,14 @@ type TextInputProps = {
     placeholder?: string,
     numeric?: boolean,
     minNumber?: number,
+    maxNumber?: number,
     value?: string,
     onChange?: ChangeEventHandler<HTMLInputElement>
 }
 
-const TextInput = ({ prefix, placeholder, numeric, minNumber, value, onChange }: TextInputProps): ReactElement => {
+const TextInput = ({
+    prefix, placeholder, numeric, minNumber, maxNumber, value, onChange
+}: TextInputProps): ReactElement => {
     const input = useRef<HTMLInputElement>(null)
     const focusInput = () => input.current?.focus()
     return (
@@ -44,6 +47,7 @@ const TextInput = ({ prefix, placeholder, numeric, minNumber, value, onChange }:
             <input
                 ref={input}
                 min={minNumber}
+                max={maxNumber}
                 value={value ?? ''}
                 css={Styles.textInput}
                 onChange={onChange}
