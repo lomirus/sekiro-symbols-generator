@@ -19,8 +19,9 @@ const Styles: Record<string, CSSObject> = {
 const BackgroundOptions = (): ReactElement => {
     const [_, dispatchOptions] = useContext(Context)
 
-    const onFileChange = (file: File) => {
+    const onFileChange = (file: File | undefined) => {
         const reader = new FileReader();
+        if (!file) return;
         reader.readAsDataURL(file);
         reader.onload = () => {
             dispatchOptions({

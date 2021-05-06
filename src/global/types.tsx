@@ -4,11 +4,11 @@ type optionsType = {
     symbol: string,
     title: string,
     color: string,
-    background?: string
+    background: string | undefined
 }
 type actionType = {
     type: string,
-    payload: string
+    payload?: string
 }
 type contextType = [optionsType, Dispatch<actionType>]
 

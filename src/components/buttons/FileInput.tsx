@@ -9,10 +9,8 @@ const FileInputStyle: CSSObject = {
 }
 
 type FileInputProps = {
-    onChange: (files: File) => void
+    onChange: (file: File | undefined) => void
 }
-
-
 
 const FileInput = ({ onChange }: FileInputProps): ReactElement => {
     const fileInput = useRef<HTMLInputElement>(null);
