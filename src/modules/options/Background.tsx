@@ -16,6 +16,8 @@ const Styles: Record<string, CSSObject> = {
 
 const BackgroundOptions = (): ReactElement => {
     const [options, dispatchOptions] = useContext(Context)
+    const MAX = 255;
+    const MIN = 0;
 
     const onFileChange = (file: File | undefined) => {
         const reader = new FileReader();
@@ -30,9 +32,17 @@ const BackgroundOptions = (): ReactElement => {
     }
 
     const onOpacityChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        let payload;
+        if (e.target.value === '') payload = MIN.toString();
+        else {
+            const opacity = parseInt(e.target.value);
+            if (opacity < MIN) payload = MIN.toString()
+            else if (opacity > MAX) payload = MAX.toString();
+            else payload = e.target.value;
+        }
         dispatchOptions({
             type: 'OPACITY',
-            payload: e.target.value
+            payload
         })
     }
 
@@ -43,7 +53,7 @@ const BackgroundOptions = (): ReactElement => {
 
             <label>Opacity</label>
             <TextInput
-                value={options.opacity.toString()} minNumber={0} maxNumber={255}
+                value={options.opacity.toString()} minNumber={MIN} maxNumber={MAX}
                 numeric={true} onChange={onOpacityChange} />
         </Option>
     )
