@@ -27,7 +27,7 @@ const App = (): ReactElement => {
     return (
         <div css={styles.root}>
             <div id="options">
-                <Options.Display />
+                <Options.Text />
                 <Options.Background />
                 <Options.Size />
             </div>

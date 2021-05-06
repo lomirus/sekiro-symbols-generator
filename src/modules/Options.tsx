@@ -1,5 +1,5 @@
-import Display from './options/Display';
+import Text from './options/Text';
 import Background from './options/Background';
 import Size from './options/Size';
 
-export { Display, Background, Size }
+export { Text, Background, Size }
