@@ -53,10 +53,11 @@ const Styles: Record<string, CSSObject> = {
     select: {
         outline: "none",
         height: "30px",
-        width: "80px",
+        width: "83px",
         border: "1px solid #dcdfe6",
         marginBottom: "15px",
         borderRadius: "4px",
+        padding: "0 0 0 3px"
     },
     children: {
         "&>span": {
