@@ -1,11 +1,11 @@
 import { useContext, useReducer, ReactElement } from 'react';
 
-import * as Options from './components/Options'
+import * as Options from './modules/options'
 import * as Buttons from './components/Buttons'
-import Preview from './components/Preview'
+import Preview from './modules/Preview'
 
-import Context from './global/context'
-import reducer from './global/reducer'
+import Context from './store/context'
+import reducer from './store/reducer'
 
 const styles = {
     root: {

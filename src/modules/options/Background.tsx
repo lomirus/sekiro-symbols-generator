@@ -1,10 +1,10 @@
 import { ChangeEventHandler, ReactElement, useContext } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import { FileInput } from '../../Buttons';
-import Option from '../Option';
-import TextInput from '../inputs/Text';
-import Context from '../../../global/context';
+import { FileInput } from '../../components/Buttons';
+import Option from '../../components/Option';
+import TextInput from '../../components/inputs/Text';
+import Context from '../../store/context';
 
 const Styles: Record<string, CSSObject> = {
     children: {

@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import Option from '../Option';
-import { Text as TextInput } from '../Inputs'
+import Option from '../../components/Option';
+import { Text as TextInput } from '../../components/Inputs'
 
 const Styles: Record<string, CSSObject> = {
     children: {

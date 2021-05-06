@@ -1,6 +1,6 @@
 import { useRef, useEffect, ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
-import { optionsType } from '../global/types'
+import { optionsType } from '../store/types'
 
 type PreviewProps = {
     options: optionsType

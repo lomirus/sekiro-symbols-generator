@@ -1,5 +1,5 @@
 import { CSSObject } from '@emotion/react';
-import { ChangeEventHandler, ReactElement, useRef } from 'react';
+import { ReactElement, useRef } from 'react';
 import ButtonStyle from './styles/Button'
 
 const FileInputStyle: CSSObject = {

@@ -1,9 +1,9 @@
 import { useRef, useContext, ReactElement, ChangeEventHandler } from 'react';
 import { CSSObject } from '@emotion/react';
 
-import { Text as TextInput, Color as ColorInput } from '../Inputs'
-import Option from '../Option';
-import Context from '../../../global/context'
+import { Text as TextInput, Color as ColorInput } from '../../components/Inputs'
+import Option from '../../components/Option';
+import Context from '../../store/context'
 
 type text = {
     symbol: string,
@@ -110,10 +110,10 @@ const MainOptions = (): ReactElement => {
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput placeholder="忍殺" value={options?.symbol} onChange={onSymbolChange} />
+            <TextInput placeholder="" value={options?.symbol} onChange={onSymbolChange} />
 
             <span>Title</span>
-            <TextInput placeholder="SHINOBI EXECUTION" value={options?.title} onChange={onTitleChange} />
+            <TextInput placeholder="" value={options?.title} onChange={onTitleChange} />
 
             <span>Color</span>
             <ColorInput value={options.color} onChange={onColorChange} />
