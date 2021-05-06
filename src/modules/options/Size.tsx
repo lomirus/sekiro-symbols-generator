@@ -1,8 +1,9 @@
-import { ReactElement } from 'react';
+import { ChangeEventHandler, ReactElement, useContext } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import Option from '../../components/Option';
 import { Text as TextInput } from '../../components/Inputs'
+import Context from '../../store/context';
 
 const Styles: Record<string, CSSObject> = {
     children: {
@@ -12,13 +13,27 @@ const Styles: Record<string, CSSObject> = {
     }
 }
 
-const SizeOptions = (): ReactElement => (
+const SizeOptions = (): ReactElement => {
+    const [options, dispatchOptions] = useContext(Context);
+    const onWidthChange: ChangeEventHandler<HTMLInputElement> = e => {
+        dispatchOptions({
+            type: "WIDTH",
+            payload: e.target.value
+        })
+    }
+    const onHeightChange: ChangeEventHandler<HTMLInputElement> = e => {
+        dispatchOptions({
+            type: "HEIGHT",
+            payload: e.target.value
+        })
+    }
+    return (
     <Option title="Size" childrenStyle={Styles.children}>
         <span>Width</span>
-        <TextInput numeric={true} minNumber={0} placeholder="1920" onChange={() => {/**/}} />
+        <TextInput numeric={true} minNumber={0} value={options.width.toString()} onChange={onWidthChange} />
         <span>Height</span>
-        <TextInput numeric={true} minNumber={0} placeholder="1080"  onChange={() => {/**/}} />
+        <TextInput numeric={true} minNumber={0} value={options.height.toString()} onChange={onHeightChange} />
     </Option>
-)
+)}
 
 export default SizeOptions

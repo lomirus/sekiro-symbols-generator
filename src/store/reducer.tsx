@@ -13,7 +13,11 @@ const reducer = (state: optionsType, action: actionType): optionsType => {
         case 'REMOVE_BACKGROUND':
             return Object.assign({}, state, { background: undefined })
         case 'OPACITY':
-            return Object.assign({}, state, { opacity: parseInt(action.payload??'0') })
+            return Object.assign({}, state, { opacity: parseInt(action.payload ?? '0') })
+        case 'WIDTH':
+            return Object.assign({}, state, { width: parseInt(action.payload ?? '0') })
+        case 'HEIGHT':
+            return Object.assign({}, state, { height: parseInt(action.payload ?? '0') })
         default:
             return state
     }

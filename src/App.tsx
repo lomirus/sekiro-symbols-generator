@@ -45,7 +45,9 @@ const ContextApp = (): ReactElement => {
                 title: ' ',
                 color: '#FFFFFF',
                 background: undefined,
-                opacity: 144
+                opacity: 144,
+                width: 1920,
+                height: 1080
             })
         }>
             <App />

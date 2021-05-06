@@ -10,20 +10,30 @@ const canvasStyle: CSSObject = {
     border: "1px solid #DCDFE6",
 }
 
-const HEIGHT = 640, WIDTH = 720
+const MAX_HEIGHT = 640, MAX_WIDTH = 900, RATIO = MAX_WIDTH / MAX_HEIGHT
 
 const Preview = ({ options }: PreviewProps): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
     let ctx: CanvasRenderingContext2D;
 
     useEffect(() => {
+        console.log(`WIDTH: ${options.width}, HEIGHT: ${options.height}`)
+        if (!canvas.current) return;
+        const ratio = options.width / options.height;
+        if (ratio > RATIO) {
+            canvas.current.style.width = `${MAX_WIDTH}px`
+            canvas.current.style.height = `${MAX_WIDTH / ratio}px`
+        } else {
+            canvas.current.style.width = `${MAX_HEIGHT * ratio}px`
+            canvas.current.style.height = `${MAX_HEIGHT}px`
+        }
         ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
 
         const image = new Image();
         if (options.background) {
             image.src = options.background as string;
             image.onload = () => {
-                ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
+                ctx.drawImage(image, 0, 0, options.width, options.height)
                 const opacity = options.opacity < 16 ?
                     '0' + options.opacity.toString(16) :
                     options.opacity.toString(16)
@@ -38,13 +48,13 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
 
     function drawBackground(color: string) {
         ctx.fillStyle = color;
-        ctx.fillRect(0, 0, WIDTH, HEIGHT)
+        ctx.fillRect(0, 0, options.width, options.height)
     }
 
     function drawText(symbol: string, title: string, color: string) {
         ctx.fillStyle = color;
         const fontSize = symbol.length === 1 ? 180 : 100
-        const top = HEIGHT / 2 + symbol.length * fontSize / 2 - 24
+        const top = options.height / 2 + symbol.length * fontSize / 2 - 24
         drawSymbol(symbol, fontSize)
         drawTitle(title, top)
     }
@@ -54,9 +64,9 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
         ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
-        let y = HEIGHT / 2 - text.length * fontSize / 2 - 48
+        let y = options.height / 2 - text.length * fontSize / 2 - 48
         text.split('').forEach(symbol => {
-            ctx.fillText(symbol, WIDTH / 2, y)
+            ctx.fillText(symbol, options.width / 2, y)
             y += fontSize
         })
     }
@@ -66,12 +76,14 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
         ctx.font = `${fontSize}px serif`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
-        ctx.fillText(title, WIDTH / 2, top)
+        ctx.fillText(title, options.width / 2, top)
     }
 
     return (
         <canvas id="preview" ref={canvas}
-            width={WIDTH} height={HEIGHT} css={canvasStyle}>
+            width={options.width} height={options.height} css={{
+                ...canvasStyle
+            }}>
         </canvas>
     )
 }
