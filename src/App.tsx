@@ -1,6 +1,6 @@
 import { useContext, useReducer, ReactElement } from 'react';
 
-import * as Options from './modules/options'
+import * as Options from './modules/Options'
 import * as Buttons from './components/Buttons'
 import Preview from './modules/Preview'
 
