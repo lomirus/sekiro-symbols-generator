@@ -32,19 +32,15 @@ const Preview = (): ReactElement => {
                 image.src = store.options.background as string;
                 image.onload = () => {
                     ctx.drawImage(image, 0, 0, store.options.width, store.options.height)
-                    const opacity = store.options.opacity < 16 ?
-                        '0' + store.options.opacity.toString(16) :
-                        store.options.opacity.toString(16)
-                    drawBackground(`#000000${opacity}`)
-                    drawText(store.options.symbol, stretch(store.options.title), store.options.color)
                     resolve(null)
                 }
             } else {
-                drawBackground("#000000")
-                drawText(store.options.symbol, stretch(store.options.title), store.options.color)
+                ctx.clearRect(0, 0, store.options.width, store.options.height)
                 resolve(null)
             }
         }).then(() => {
+            drawMask(store.options.opacity)
+            drawText(store.options.symbol, store.options.title, store.options.color)
             dispatchStore({
                 type: "URL",
                 payload: canvas.current?.toDataURL()
@@ -52,8 +48,11 @@ const Preview = (): ReactElement => {
         })
     }, [JSON.stringify(store.options)])
 
-    function drawBackground(color: string) {
-        ctx.fillStyle = color;
+    function drawMask(opacityDec: number) {
+        const opacity = opacityDec < 16 ?
+            '0' + opacityDec.toString(16) :
+            opacityDec.toString(16)
+        ctx.fillStyle = `#000000${opacity}`;
         ctx.fillRect(0, 0, store.options.width, store.options.height)
     }
 
@@ -62,7 +61,7 @@ const Preview = (): ReactElement => {
         const fontSize = symbol.length === 1 ? 180 : 100
         const top = store.options.height / 2 + symbol.length * fontSize / 2 - 24
         drawSymbol(symbol, fontSize)
-        drawTitle(title, top)
+        drawTitle(stretch(title), top)
     }
 
     function drawSymbol(text: string, fontSize: number) {
