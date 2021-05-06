@@ -15,7 +15,7 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const BackgroundOptions = (): ReactElement => {
-    const [options, dispatchOptions] = useContext(Context)
+    const [store, dispatchStore] = useContext(Context)
     const MAX = 255;
     const MIN = 0;
 
@@ -24,7 +24,7 @@ const BackgroundOptions = (): ReactElement => {
         if (!file) return;
         reader.readAsDataURL(file);
         reader.onload = () => {
-            dispatchOptions({
+            dispatchStore({
                 type: 'BACKGROUND',
                 payload: reader.result as string
             })
@@ -40,7 +40,7 @@ const BackgroundOptions = (): ReactElement => {
             else if (opacity > MAX) payload = MAX.toString();
             else payload = e.target.value;
         }
-        dispatchOptions({
+        dispatchStore({
             type: 'OPACITY',
             payload
         })
@@ -53,7 +53,7 @@ const BackgroundOptions = (): ReactElement => {
 
             <label>Opacity</label>
             <TextInput
-                value={options.opacity.toString()} minNumber={MIN} maxNumber={MAX}
+                value={store.options.opacity.toString()} minNumber={MIN} maxNumber={MAX}
                 numeric={true} onChange={onOpacityChange} />
         </Option>
     )

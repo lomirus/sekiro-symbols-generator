@@ -10,13 +10,13 @@ const MAX_HEIGHT = 640, MAX_WIDTH = 900, RATIO = MAX_WIDTH / MAX_HEIGHT
 
 const Preview = (): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
-    const [options, dispatchOptions] = useContext(Context)
+    const [store, dispatchStore] = useContext(Context)
     let ctx: CanvasRenderingContext2D;
 
     useEffect(() => {
-        console.log(123)
+        console.log('asd')
         if (!canvas.current) return;
-        const ratio = options.width / options.height;
+        const ratio = store.options.width / store.options.height;
         if (ratio > RATIO) {
             canvas.current.style.width = `${MAX_WIDTH}px`
             canvas.current.style.height = `${MAX_WIDTH / ratio}px`
@@ -28,47 +28,39 @@ const Preview = (): ReactElement => {
 
         const image = new Image();
         new Promise(resolve => {
-            if (options.background) {
-                image.src = options.background as string;
+            if (store.options.background) {
+                image.src = store.options.background as string;
                 image.onload = () => {
-                    ctx.drawImage(image, 0, 0, options.width, options.height)
-                    const opacity = options.opacity < 16 ?
-                        '0' + options.opacity.toString(16) :
-                        options.opacity.toString(16)
+                    ctx.drawImage(image, 0, 0, store.options.width, store.options.height)
+                    const opacity = store.options.opacity < 16 ?
+                        '0' + store.options.opacity.toString(16) :
+                        store.options.opacity.toString(16)
                     drawBackground(`#000000${opacity}`)
-                    drawText(options.symbol, stretch(options.title), options.color)
+                    drawText(store.options.symbol, stretch(store.options.title), store.options.color)
                     resolve(null)
                 }
             } else {
                 drawBackground("#000000")
-                drawText(options.symbol, stretch(options.title), options.color)
+                drawText(store.options.symbol, stretch(store.options.title), store.options.color)
                 resolve(null)
             }
         }).then(() => {
-            dispatchOptions({
+            dispatchStore({
                 type: "URL",
                 payload: canvas.current?.toDataURL()
             })
         })
-    }, [
-        options.symbol,
-        options.title,
-        options.color,
-        options.background,
-        options.opacity,
-        options.width,
-        options.height
-    ])
+    }, [JSON.stringify(store.options)])
 
     function drawBackground(color: string) {
         ctx.fillStyle = color;
-        ctx.fillRect(0, 0, options.width, options.height)
+        ctx.fillRect(0, 0, store.options.width, store.options.height)
     }
 
     function drawText(symbol: string, title: string, color: string) {
         ctx.fillStyle = color;
         const fontSize = symbol.length === 1 ? 180 : 100
-        const top = options.height / 2 + symbol.length * fontSize / 2 - 24
+        const top = store.options.height / 2 + symbol.length * fontSize / 2 - 24
         drawSymbol(symbol, fontSize)
         drawTitle(title, top)
     }
@@ -78,9 +70,9 @@ const Preview = (): ReactElement => {
         ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
-        let y = options.height / 2 - text.length * fontSize / 2 - 48
+        let y = store.options.height / 2 - text.length * fontSize / 2 - 48
         text.split('').forEach(symbol => {
-            ctx.fillText(symbol, options.width / 2, y)
+            ctx.fillText(symbol, store.options.width / 2, y)
             y += fontSize
         })
     }
@@ -90,12 +82,12 @@ const Preview = (): ReactElement => {
         ctx.font = `${fontSize}px serif`
         ctx.textAlign = 'center'
         ctx.textBaseline = 'top'
-        ctx.fillText(title, options.width / 2, top)
+        ctx.fillText(title, store.options.width / 2, top)
     }
 
     return (
         <canvas id="preview" ref={canvas}
-            width={options.width} height={options.height} css={{
+            width={store.options.width} height={store.options.height} css={{
                 ...canvasStyle
             }}>
         </canvas>

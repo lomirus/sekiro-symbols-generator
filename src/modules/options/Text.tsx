@@ -66,60 +66,60 @@ const Styles: Record<string, CSSObject> = {
     }
 }
 
-const MainOptions = (): ReactElement => {
-    const [options, dispatchOptions] = useContext(Context)
+const TextOptions = (): ReactElement => {
+    const [store, dispatchStore] = useContext(Context)
     const selector = useRef<HTMLSelectElement>(null)
     const handleSelect = () => {
         const newTextState = presets[selector.current?.selectedIndex ?? 0]
-        dispatchOptions({
+        dispatchStore({
             type: 'SYMBOL',
             payload: newTextState.symbol
         })
-        dispatchOptions({
+        dispatchStore({
             type: 'TITLE',
             payload: newTextState.title
         })
-        dispatchOptions({
+        dispatchStore({
             type: 'COLOR',
             payload: newTextState.color
         })
     }
 
     const onSymbolChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchOptions({
+        dispatchStore({
             type: 'SYMBOL',
             payload: e.target.value
         })
     }
     const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchOptions({
+        dispatchStore({
             type: 'TITLE',
             payload: e.target.value
         })
     }
     const onColorChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchOptions({
+        dispatchStore({
             type: 'COLOR',
             payload: e.target.value
         })
     }
     return (
-        <Option title="Display" childrenStyle={Styles.children}
+        <Option title="Text" childrenStyle={Styles.children}
             preset={
                 <select css={Styles.select} ref={selector} onChange={handleSelect}>
                     {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput placeholder="" value={options?.symbol} onChange={onSymbolChange} />
+            <TextInput placeholder="" value={store.options.symbol} onChange={onSymbolChange} />
 
             <span>Title</span>
-            <TextInput placeholder="" value={options?.title} onChange={onTitleChange} />
+            <TextInput placeholder="" value={store.options.title} onChange={onTitleChange} />
 
             <span>Color</span>
-            <ColorInput value={options.color} onChange={onColorChange} />
+            <ColorInput value={store.options.color} onChange={onColorChange} />
         </Option>
     )
 }
 
-export default MainOptions
+export default TextOptions

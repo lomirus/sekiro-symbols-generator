@@ -23,7 +23,7 @@ const styles = {
 }
 
 const App = (): ReactElement => {
-    const options = useContext(Context)[0]
+    const store = useContext(Context)[0]
     return (
         <div css={styles.root}>
             <div id="options">
@@ -33,8 +33,8 @@ const App = (): ReactElement => {
             </div>
             <Preview />
             <Buttons.Download filename={
-                `[${options.symbol}-${options.title}](${options.width},${options.height})`
-                } url={options.url} style={styles.download} />
+                `[${store.options.symbol}-${store.options.title}](${store.options.width},${store.options.height})`
+            } url={store.url} style={styles.download} />
         </div>
     )
 }
@@ -43,13 +43,15 @@ const ContextApp = (): ReactElement => {
     return (
         <Context.Provider value={
             useReducer(reducer, {
-                symbol: ' ',
-                title: ' ',
-                color: '#FFFFFF',
-                background: undefined,
-                opacity: 144,
-                width: 1920,
-                height: 1080,
+                options: {
+                    symbol: ' ',
+                    title: ' ',
+                    color: '#FFFFFF',
+                    background: undefined,
+                    opacity: 144,
+                    width: 1920,
+                    height: 1080,
+                },
                 url: ''
             })
         }>

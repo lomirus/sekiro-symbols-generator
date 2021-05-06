@@ -1,29 +1,30 @@
-import { optionsType, actionType } from './types'
+import { storeType, actionType } from './types'
 
-const reducer = (state: optionsType, action: actionType): optionsType => {
-    console.log(action.type)
+const reducer = (state: storeType, action: actionType): storeType => {
+    const newState = Object.assign({}, state);
+    
     switch (action.type) {
         case 'SYMBOL':
-            return Object.assign({}, state, { symbol: action.payload })
+            newState.options.symbol = action.payload as string; break;
         case 'TITLE':
-            return Object.assign({}, state, { title: action.payload })
+            newState.options.title = action.payload as string; break;
         case 'COLOR':
-            return Object.assign({}, state, { color: action.payload })
+            newState.options.color = action.payload as string; break;
         case 'BACKGROUND':
-            return Object.assign({}, state, { background: action.payload })
+            newState.options.background = action.payload as string; break;
         case 'REMOVE_BACKGROUND':
-            return Object.assign({}, state, { background: undefined })
+            newState.options.background = undefined; break;
         case 'OPACITY':
-            return Object.assign({}, state, { opacity: parseInt(action.payload ?? '0') })
+            newState.options.opacity = parseInt(action.payload ?? '0'); break;
         case 'WIDTH':
-            return Object.assign({}, state, { width: parseInt(action.payload ?? '0') })
+            newState.options.width = parseInt(action.payload ?? '0'); break;
         case 'HEIGHT':
-            return Object.assign({}, state, { height: parseInt(action.payload ?? '0') })
+            newState.options.height = parseInt(action.payload ?? '0'); break;
         case 'URL':
-            return Object.assign({}, state, { url: action.payload })
-        default:
-            return state
+            newState.url = action.payload as string; break;
     }
+    
+    return newState
 };
 
 export default reducer

@@ -14,15 +14,15 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const SizeOptions = (): ReactElement => {
-    const [options, dispatchOptions] = useContext(Context);
+    const [store, dispatchStore] = useContext(Context);
     const onWidthChange: ChangeEventHandler<HTMLInputElement> = e => {
-        dispatchOptions({
+        dispatchStore({
             type: "WIDTH",
             payload: e.target.value
         })
     }
     const onHeightChange: ChangeEventHandler<HTMLInputElement> = e => {
-        dispatchOptions({
+        dispatchStore({
             type: "HEIGHT",
             payload: e.target.value
         })
@@ -30,9 +30,9 @@ const SizeOptions = (): ReactElement => {
     return (
     <Option title="Size" childrenStyle={Styles.children}>
         <span>Width</span>
-        <TextInput numeric={true} minNumber={0} value={options.width.toString()} onChange={onWidthChange} />
+        <TextInput numeric={true} minNumber={0} value={store.options.width.toString()} onChange={onWidthChange} />
         <span>Height</span>
-        <TextInput numeric={true} minNumber={0} value={options.height.toString()} onChange={onHeightChange} />
+        <TextInput numeric={true} minNumber={0} value={store.options.height.toString()} onChange={onHeightChange} />
     </Option>
 )}
 
