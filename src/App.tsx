@@ -23,7 +23,7 @@ const styles = {
 }
 
 const App = (): ReactElement => {
-    const textState = useContext(Context)[0]
+    const options = useContext(Context)[0]
     return (
         <div css={styles.root}>
             <div id="options">
@@ -31,7 +31,7 @@ const App = (): ReactElement => {
                 <Options.Background />
                 <Options.Size />
             </div>
-            <Preview text={textState} />
+            <Preview options={options} />
             <Buttons.Download style={styles.download} />
         </div>
     )
@@ -39,7 +39,13 @@ const App = (): ReactElement => {
 
 const ContextApp = (): ReactElement => {
     return (
-        <Context.Provider value={useReducer(reducer, { symbol: ' ', title: ' ', color: '#FFFFFF' })}>
+        <Context.Provider value={
+            useReducer(reducer, {
+                symbol: ' ',
+                title: ' ',
+                color: '#FFFFFF'
+            })
+        }>
             <App />
         </Context.Provider>
     )

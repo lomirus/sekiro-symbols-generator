@@ -1,15 +1,16 @@
 import { Dispatch } from 'react';
 
-type textType = {
+type optionsType = {
     symbol: string,
     title: string,
-    color: string
+    color: string,
+    background?: string
 }
 type actionType = {
     type: string,
     payload: string
 }
-type contextType = [textType, Dispatch<actionType>]
+type contextType = [optionsType, Dispatch<actionType>]
 
 
-export { textType, actionType, contextType }
+export { optionsType, actionType, contextType }

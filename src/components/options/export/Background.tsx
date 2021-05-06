@@ -1,9 +1,10 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../../Buttons';
 import Option from '../Option';
 import TextInput from '../inputs/Text';
+import Context from '../../../global/context';
 
 const Styles: Record<string, CSSObject> = {
     children: {
@@ -13,14 +14,31 @@ const Styles: Record<string, CSSObject> = {
     }
 }
 
-const BackgroundOptions = (): ReactElement => (
-    <Option title="Background" childrenStyle={Styles.children}>
-        <label>Image</label>
-        <FileInput />
 
-        <label>Opacity</label>
-        <TextInput value="100" minNumber={0} maxNumber={100} numeric={true} onChange={() => {/**/}}/>
-    </Option>
-)
+
+const BackgroundOptions = (): ReactElement => {
+    const [_, dispatchOptions] = useContext(Context)
+
+    const onFileChange = (file: File) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+            dispatchOptions({
+                type: 'BACKGROUND',
+                payload: reader.result as string
+            })
+        }
+    }
+
+    return (
+        <Option title="Background" childrenStyle={Styles.children}>
+            <label>Image</label>
+            <FileInput onChange={onFileChange} />
+
+            <label>Opacity</label>
+            <TextInput value="100" minNumber={0} maxNumber={100} numeric={true} onChange={() => {/**/ }} />
+        </Option>
+    )
+}
 
 export default BackgroundOptions

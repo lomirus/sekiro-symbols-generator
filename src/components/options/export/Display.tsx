@@ -66,38 +66,38 @@ const Styles: Record<string, CSSObject> = {
 }
 
 const MainOptions = (): ReactElement => {
-    const [textState, dispatchText] = useContext(Context)
+    const [options, dispatchOptions] = useContext(Context)
     const selector = useRef<HTMLSelectElement>(null)
     const handleSelect = () => {
         const newTextState = presets[selector.current?.selectedIndex ?? 0]
-        dispatchText({
+        dispatchOptions({
             type: 'SYMBOL',
             payload: newTextState.symbol
         })
-        dispatchText({
+        dispatchOptions({
             type: 'TITLE',
             payload: newTextState.title
         })
-        dispatchText({
+        dispatchOptions({
             type: 'COLOR',
             payload: newTextState.color
         })
     }
 
     const onSymbolChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchText({
+        dispatchOptions({
             type: 'SYMBOL',
             payload: e.target.value
         })
     }
     const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchText({
+        dispatchOptions({
             type: 'TITLE',
             payload: e.target.value
         })
     }
     const onColorChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        dispatchText({
+        dispatchOptions({
             type: 'COLOR',
             payload: e.target.value
         })
@@ -110,13 +110,13 @@ const MainOptions = (): ReactElement => {
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput placeholder="忍殺" value={textState?.symbol} onChange={onSymbolChange} />
+            <TextInput placeholder="忍殺" value={options?.symbol} onChange={onSymbolChange} />
 
             <span>Title</span>
-            <TextInput placeholder="SHINOBI EXECUTION" value={textState?.title} onChange={onTitleChange} />
+            <TextInput placeholder="SHINOBI EXECUTION" value={options?.title} onChange={onTitleChange} />
 
             <span>Color</span>
-            <ColorInput value={textState.color} onChange={onColorChange} />
+            <ColorInput value={options.color} onChange={onColorChange} />
         </Option>
     )
 }
