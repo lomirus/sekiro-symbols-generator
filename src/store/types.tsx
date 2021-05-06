@@ -7,7 +7,8 @@ type optionsType = {
     background: string | undefined,
     opacity: number,
     width: number,
-    height: number
+    height: number,
+    url: string
 }
 type actionType = {
     type: string,

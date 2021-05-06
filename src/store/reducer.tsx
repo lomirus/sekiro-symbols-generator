@@ -1,6 +1,7 @@
 import { optionsType, actionType } from './types'
 
 const reducer = (state: optionsType, action: actionType): optionsType => {
+    console.log(action.type)
     switch (action.type) {
         case 'SYMBOL':
             return Object.assign({}, state, { symbol: action.payload })
@@ -18,6 +19,8 @@ const reducer = (state: optionsType, action: actionType): optionsType => {
             return Object.assign({}, state, { width: parseInt(action.payload ?? '0') })
         case 'HEIGHT':
             return Object.assign({}, state, { height: parseInt(action.payload ?? '0') })
+        case 'URL':
+            return Object.assign({}, state, { url: action.payload })
         default:
             return state
     }

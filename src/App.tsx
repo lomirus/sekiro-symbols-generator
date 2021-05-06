@@ -31,8 +31,10 @@ const App = (): ReactElement => {
                 <Options.Background />
                 <Options.Size />
             </div>
-            <Preview options={options} />
-            <Buttons.Download style={styles.download} />
+            <Preview />
+            <Buttons.Download filename={
+                `[${options.symbol}-${options.title}](${options.width},${options.height})`
+                } url={options.url} style={styles.download} />
         </div>
     )
 }
@@ -47,7 +49,8 @@ const ContextApp = (): ReactElement => {
                 background: undefined,
                 opacity: 144,
                 width: 1920,
-                height: 1080
+                height: 1080,
+                url: ''
             })
         }>
             <App />

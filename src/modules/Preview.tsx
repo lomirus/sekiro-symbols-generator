@@ -1,10 +1,6 @@
-import { useRef, useEffect, ReactElement } from 'react';
+import { useContext, useRef, useEffect, ReactElement } from 'react';
 import { CSSObject } from '@emotion/react';
-import { optionsType } from '../store/types'
-
-type PreviewProps = {
-    options: optionsType
-}
+import Context from '../store/context';
 
 const canvasStyle: CSSObject = {
     border: "1px solid #DCDFE6",
@@ -12,12 +8,13 @@ const canvasStyle: CSSObject = {
 
 const MAX_HEIGHT = 640, MAX_WIDTH = 900, RATIO = MAX_WIDTH / MAX_HEIGHT
 
-const Preview = ({ options }: PreviewProps): ReactElement => {
+const Preview = (): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
+    const [options, dispatchOptions] = useContext(Context)
     let ctx: CanvasRenderingContext2D;
 
     useEffect(() => {
-        console.log(`WIDTH: ${options.width}, HEIGHT: ${options.height}`)
+        console.log(123)
         if (!canvas.current) return;
         const ratio = options.width / options.height;
         if (ratio > RATIO) {
@@ -30,21 +27,38 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
         ctx = canvas.current?.getContext("2d") as CanvasRenderingContext2D;
 
         const image = new Image();
-        if (options.background) {
-            image.src = options.background as string;
-            image.onload = () => {
-                ctx.drawImage(image, 0, 0, options.width, options.height)
-                const opacity = options.opacity < 16 ?
-                    '0' + options.opacity.toString(16) :
-                    options.opacity.toString(16)
-                drawBackground(`#000000${opacity}`)
+        new Promise(resolve => {
+            if (options.background) {
+                image.src = options.background as string;
+                image.onload = () => {
+                    ctx.drawImage(image, 0, 0, options.width, options.height)
+                    const opacity = options.opacity < 16 ?
+                        '0' + options.opacity.toString(16) :
+                        options.opacity.toString(16)
+                    drawBackground(`#000000${opacity}`)
+                    drawText(options.symbol, stretch(options.title), options.color)
+                    resolve(null)
+                }
+            } else {
+                drawBackground("#000000")
                 drawText(options.symbol, stretch(options.title), options.color)
+                resolve(null)
             }
-        } else {
-            drawBackground("#000000")
-            drawText(options.symbol, stretch(options.title), options.color)
-        }
-    })
+        }).then(() => {
+            dispatchOptions({
+                type: "URL",
+                payload: canvas.current?.toDataURL()
+            })
+        })
+    }, [
+        options.symbol,
+        options.title,
+        options.color,
+        options.background,
+        options.opacity,
+        options.width,
+        options.height
+    ])
 
     function drawBackground(color: string) {
         ctx.fillStyle = color;
