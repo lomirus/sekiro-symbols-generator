@@ -24,6 +24,10 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
             image.src = options.background as string;
             image.onload = () => {
                 ctx.drawImage(image, 0, 0)
+                const opacity = options.opacity < 16 ?
+                    '0' + options.opacity.toString(16) :
+                    options.opacity.toString(16)
+                drawBackground(`#000000${opacity}`)
                 drawText(options.symbol, stretch(options.title), options.color)
             }
         } else {

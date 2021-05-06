@@ -43,7 +43,9 @@ const ContextApp = (): ReactElement => {
             useReducer(reducer, {
                 symbol: ' ',
                 title: ' ',
-                color: '#FFFFFF'
+                color: '#FFFFFF',
+                background: undefined,
+                opacity: 255
             })
         }>
             <App />

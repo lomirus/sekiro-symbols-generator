@@ -4,7 +4,8 @@ type optionsType = {
     symbol: string,
     title: string,
     color: string,
-    background: string | undefined
+    background: string | undefined,
+    opacity: number
 }
 type actionType = {
     type: string,

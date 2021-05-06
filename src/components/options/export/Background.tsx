@@ -1,4 +1,4 @@
-import { ReactElement, useContext } from 'react';
+import { ChangeEventHandler, ReactElement, useContext } from 'react';
 import { CSSObject } from '@emotion/react';
 
 import { FileInput } from '../../Buttons';
@@ -14,10 +14,8 @@ const Styles: Record<string, CSSObject> = {
     }
 }
 
-
-
 const BackgroundOptions = (): ReactElement => {
-    const [_, dispatchOptions] = useContext(Context)
+    const [options, dispatchOptions] = useContext(Context)
 
     const onFileChange = (file: File | undefined) => {
         const reader = new FileReader();
@@ -31,13 +29,22 @@ const BackgroundOptions = (): ReactElement => {
         }
     }
 
+    const onOpacityChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        dispatchOptions({
+            type: 'OPACITY',
+            payload: e.target.value
+        })
+    }
+
     return (
         <Option title="Background" childrenStyle={Styles.children}>
             <label>Image</label>
             <FileInput onChange={onFileChange} />
 
             <label>Opacity</label>
-            <TextInput value="100" minNumber={0} maxNumber={100} numeric={true} onChange={() => {/**/ }} />
+            <TextInput
+                value={options.opacity.toString()} minNumber={0} maxNumber={255}
+                numeric={true} onChange={onOpacityChange} />
         </Option>
     )
 }
