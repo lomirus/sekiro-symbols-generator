@@ -23,7 +23,7 @@ const Preview = ({ options }: PreviewProps): ReactElement => {
         if (options.background) {
             image.src = options.background as string;
             image.onload = () => {
-                ctx.drawImage(image, 0, 0)
+                ctx.drawImage(image, 0, 0, WIDTH, HEIGHT)
                 const opacity = options.opacity < 16 ?
                     '0' + options.opacity.toString(16) :
                     options.opacity.toString(16)
