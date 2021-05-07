@@ -8,15 +8,18 @@ const canvasStyle: CSSObject = {
 
 const MAX_HEIGHT = 640, MAX_WIDTH = 900, RATIO = MAX_WIDTH / MAX_HEIGHT
 
+const stretch = (oldText: string): string => oldText.split('').join(' ')
+let getUrl: () => string;
+
 const Preview = (): ReactElement => {
     const canvas = useRef<HTMLCanvasElement>(null)
-    const [store, dispatchStore] = useContext(Context)
+    const store = useContext(Context)[0]
     let ctx: CanvasRenderingContext2D;
 
     useEffect(() => {
         console.log('asd')
         if (!canvas.current) return;
-        const ratio = store.options.width / store.options.height;
+        const ratio = store.width / store.height;
         if (ratio > RATIO) {
             canvas.current.style.width = `${MAX_WIDTH}px`
             canvas.current.style.height = `${MAX_WIDTH / ratio}px`
@@ -28,36 +31,34 @@ const Preview = (): ReactElement => {
 
         const image = new Image();
         new Promise(resolve => {
-            if (store.options.background) {
-                image.src = store.options.background as string;
+            if (store.background) {
+                image.src = store.background as string;
                 image.onload = () => {
-                    ctx.drawImage(image, 0, 0, store.options.width, store.options.height)
+                    ctx.drawImage(image, 0, 0, store.width, store.height)
                     resolve(null)
                 }
             } else {
-                ctx.clearRect(0, 0, store.options.width, store.options.height)
+                ctx.clearRect(0, 0, store.width, store.height)
                 resolve(null)
             }
         }).then(() => {
-            drawMask(store.options.opacity)
-            drawText(store.options.symbol, store.options.annotation, store.options.color)
-            dispatchStore({
-                type: "URL",
-                payload: canvas.current?.toDataURL()
-            })
+            drawMask(store.opacity)
+            drawText(store.symbol, store.annotation, store.color)
         })
-    }, [JSON.stringify(store.options)])
+    }, [JSON.stringify(store)])
+
+    getUrl = (): string => canvas.current?.toDataURL() as string
 
     function drawMask(opacityDec: number) {
         const opacity = opacityDec < 16 ?
             '0' + opacityDec.toString(16) :
             opacityDec.toString(16)
         ctx.fillStyle = `#000000${opacity}`;
-        ctx.fillRect(0, 0, store.options.width, store.options.height)
+        ctx.fillRect(0, 0, store.width, store.height)
     }
 
     function drawText(symbol: string, annotation: string, color: string) {
-        const ratio = store.options.height / 1080
+        const ratio = store.height / 1080
         const symbols_top = (() => {
             switch (symbol.length) {
                 case 1: return 320;
@@ -92,27 +93,22 @@ const Preview = (): ReactElement => {
         ctx.font = `${symbol_size}px ${fontFamily.map(name => `"${name}"`).join(',')}`
         let symbol_top = symbols_top
         symbol.split('').forEach(char => {
-            ctx.fillText(char, store.options.width / 2, symbol_top)
+            ctx.fillText(char, store.width / 2, symbol_top)
             symbol_top += symbol_size + symbols_gap
         })
 
-        ctx.font = `${36 / 1080 * store.options.height}px serif`
-        ctx.fillText(stretch(annotation), store.options.width / 2, text_top)
+        ctx.font = `${36 / 1080 * store.height}px serif`
+        ctx.fillText(stretch(annotation), store.width / 2, text_top)
     }
 
     return (
         <canvas id="preview" ref={canvas}
-            width={store.options.width} height={store.options.height} css={{
+            width={store.width} height={store.height} css={{
                 ...canvasStyle
             }}>
         </canvas>
     )
 }
 
-const stretch = (oldText: string): string => oldText.split('').join(' ')
 
-
-
-
-
-export default Preview
+export { Preview, getUrl }

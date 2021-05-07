@@ -2,7 +2,7 @@ import { useContext, useReducer, ReactElement } from 'react';
 
 import * as Options from './modules/Options'
 import * as Buttons from './components/Buttons'
-import Preview from './modules/Preview'
+import { Preview } from './modules/Preview'
 
 import Context from './store/context'
 import reducer from './store/reducer'
@@ -33,8 +33,8 @@ const App = (): ReactElement => {
             </div>
             <Preview />
             <Buttons.Download filename={
-                `[${store.options.symbol}-${store.options.annotation}](${store.options.width},${store.options.height})`
-            } url={store.url} style={styles.download} />
+                `[${store.symbol}-${store.annotation}](${store.width},${store.height})`
+            } style={styles.download} />
         </div>
     )
 }
@@ -43,16 +43,13 @@ const ContextApp = (): ReactElement => {
     return (
         <Context.Provider value={
             useReducer(reducer, {
-                options: {
-                    symbol: ' ',
-                    annotation: ' ',
-                    color: '#FFFFFF',
-                    background: undefined,
-                    opacity: 144,
-                    width: 1920,
-                    height: 1080,
-                },
-                url: ''
+                symbol: ' ',
+                annotation: ' ',
+                color: '#FFFFFF',
+                background: undefined,
+                opacity: 144,
+                width: 1920,
+                height: 1080,
             })
         }>
             <App />

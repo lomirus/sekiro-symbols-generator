@@ -1,11 +1,11 @@
 import { CSSObject } from '@emotion/react';
-import { ReactElement, CSSProperties, } from 'react';
+import { useState, ReactElement, CSSProperties, } from 'react';
+import { getUrl } from '../../modules/Preview'
 import ButtonStyle from './styles/Button'
 
 type DownloadProps = {
     style?: CSSProperties,
     filename: string,
-    url: string
 }
 
 const DownloadStyle: CSSObject = {
@@ -17,13 +17,15 @@ const DownloadStyle: CSSObject = {
     alignItems: "center"
 }
 
-const Download = ({ style, filename, url }: DownloadProps): ReactElement => {
+const Download = ({ style, filename }: DownloadProps): ReactElement => {
+    const [url, setUrl] = useState('');
+    const handleClick = () => setUrl(getUrl())
     return (
         <a css={{
             ...ButtonStyle,
             ...DownloadStyle,
             ...style
-        }} download={filename} href={url}>Download</a>
+        }} download={filename} href={url} onClick={handleClick}>Download</a>
     )
 }
 

@@ -111,13 +111,13 @@ const TextOptions = (): ReactElement => {
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput value={store.options.symbol} onChange={onSymbolChange} />
+            <TextInput value={store.symbol} onChange={onSymbolChange} />
 
             <span>Annotation</span>
-            <TextInput value={store.options.annotation} onChange={onAnnotationChange} />
+            <TextInput value={store.annotation} onChange={onAnnotationChange} />
 
             <span>Color</span>
-            <ColorInput value={store.options.color} onChange={onColorChange} />
+            <ColorInput value={store.color} onChange={onColorChange} />
         </Option>
     )
 }

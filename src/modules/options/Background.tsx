@@ -53,7 +53,7 @@ const BackgroundOptions = (): ReactElement => {
 
             <label>Opacity</label>
             <TextInput
-                value={store.options.opacity.toString()} minNumber={MIN} maxNumber={MAX}
+                value={store.opacity.toString()} minNumber={MIN} maxNumber={MAX}
                 numeric={true} onChange={onOpacityChange} />
         </Option>
     )

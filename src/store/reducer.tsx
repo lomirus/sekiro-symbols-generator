@@ -5,23 +5,21 @@ const reducer = (state: storeType, action: actionType): storeType => {
     
     switch (action.type) {
         case 'SYMBOL':
-            newState.options.symbol = action.payload as string; break;
+            newState.symbol = action.payload as string; break;
         case 'ANNOTATION':
-            newState.options.annotation = action.payload as string; break;
+            newState.annotation = action.payload as string; break;
         case 'COLOR':
-            newState.options.color = action.payload as string; break;
+            newState.color = action.payload as string; break;
         case 'BACKGROUND':
-            newState.options.background = action.payload as string; break;
+            newState.background = action.payload as string; break;
         case 'REMOVE_BACKGROUND':
-            newState.options.background = undefined; break;
+            newState.background = undefined; break;
         case 'OPACITY':
-            newState.options.opacity = parseInt(action.payload ?? '0'); break;
+            newState.opacity = parseInt(action.payload ?? '0'); break;
         case 'WIDTH':
-            newState.options.width = parseInt(action.payload ?? '0'); break;
+            newState.width = parseInt(action.payload ?? '0'); break;
         case 'HEIGHT':
-            newState.options.height = parseInt(action.payload ?? '0'); break;
-        case 'URL':
-            newState.url = action.payload as string; break;
+            newState.height = parseInt(action.payload ?? '0'); break;
     }
 
     return newState

@@ -30,9 +30,9 @@ const SizeOptions = (): ReactElement => {
     return (
     <Option title="Size" childrenStyle={Styles.children}>
         <span>Width</span>
-        <TextInput numeric={true} minNumber={0} value={store.options.width.toString()} onChange={onWidthChange} />
+        <TextInput numeric={true} minNumber={0} value={store.width.toString()} onChange={onWidthChange} />
         <span>Height</span>
-        <TextInput numeric={true} minNumber={0} value={store.options.height.toString()} onChange={onHeightChange} />
+        <TextInput numeric={true} minNumber={0} value={store.height.toString()} onChange={onHeightChange} />
     </Option>
 )}
 
