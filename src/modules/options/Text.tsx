@@ -94,7 +94,7 @@ const TextOptions = (): ReactElement => {
     const onAnnotationChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         dispatchStore({
             type: 'ANNOTATION',
-            payload: e.target.value
+            payload: e.target.value.toUpperCase()
         })
     }
     const onColorChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -111,10 +111,10 @@ const TextOptions = (): ReactElement => {
                 </select>
             }>
             <span>Symbol</span>
-            <TextInput placeholder="" value={store.options.symbol} onChange={onSymbolChange} />
+            <TextInput value={store.options.symbol} onChange={onSymbolChange} />
 
             <span>Annotation</span>
-            <TextInput placeholder="" value={store.options.annotation} onChange={onAnnotationChange} />
+            <TextInput value={store.options.annotation} onChange={onAnnotationChange} />
 
             <span>Color</span>
             <ColorInput value={store.options.color} onChange={onColorChange} />
