@@ -6,8 +6,8 @@ const reducer = (state: storeType, action: actionType): storeType => {
     switch (action.type) {
         case 'SYMBOL':
             newState.options.symbol = action.payload as string; break;
-        case 'TITLE':
-            newState.options.title = action.payload as string; break;
+        case 'ANNOTATION':
+            newState.options.annotation = action.payload as string; break;
         case 'COLOR':
             newState.options.color = action.payload as string; break;
         case 'BACKGROUND':
@@ -23,7 +23,7 @@ const reducer = (state: storeType, action: actionType): storeType => {
         case 'URL':
             newState.url = action.payload as string; break;
     }
-    
+
     return newState
 };
 

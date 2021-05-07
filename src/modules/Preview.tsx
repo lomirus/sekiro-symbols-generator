@@ -40,7 +40,7 @@ const Preview = (): ReactElement => {
             }
         }).then(() => {
             drawMask(store.options.opacity)
-            drawText(store.options.symbol, store.options.title, store.options.color)
+            drawText(store.options.symbol, store.options.annotation, store.options.color)
             dispatchStore({
                 type: "URL",
                 payload: canvas.current?.toDataURL()
@@ -56,7 +56,7 @@ const Preview = (): ReactElement => {
         ctx.fillRect(0, 0, store.options.width, store.options.height)
     }
 
-    function drawText(symbol: string, title: string, color: string) {
+    function drawText(symbol: string, annotation: string, color: string) {
         const symbols_top = (() => {
             switch (symbol.length) {
                 case 1: return 320;
@@ -96,7 +96,7 @@ const Preview = (): ReactElement => {
         })
 
         ctx.font = `36px serif`
-        ctx.fillText(stretch(title), store.options.width / 2, text_top)
+        ctx.fillText(stretch(annotation), store.options.width / 2, text_top)
     }
 
     return (

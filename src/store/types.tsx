@@ -3,7 +3,7 @@ import { Dispatch } from 'react';
 type storeType = {
     options: {
         symbol: string,
-        title: string,
+        annotation: string,
         color: string,
         background: string | undefined,
         opacity: number,

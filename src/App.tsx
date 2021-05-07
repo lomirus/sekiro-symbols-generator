@@ -33,7 +33,7 @@ const App = (): ReactElement => {
             </div>
             <Preview />
             <Buttons.Download filename={
-                `[${store.options.symbol}-${store.options.title}](${store.options.width},${store.options.height})`
+                `[${store.options.symbol}-${store.options.annotation}](${store.options.width},${store.options.height})`
             } url={store.url} style={styles.download} />
         </div>
     )
@@ -45,7 +45,7 @@ const ContextApp = (): ReactElement => {
             useReducer(reducer, {
                 options: {
                     symbol: ' ',
-                    title: ' ',
+                    annotation: ' ',
                     color: '#FFFFFF',
                     background: undefined,
                     opacity: 144,

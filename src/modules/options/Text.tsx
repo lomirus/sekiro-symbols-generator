@@ -7,45 +7,45 @@ import Context from '../../store/context'
 
 type text = {
     symbol: string,
-    title: string,
+    annotation: string,
     color: string
 }
 
 const presets: Array<text> = [{
     symbol: "死",
-    title: "DEATH",
+    annotation: "DEATH",
     color: "#A72C2A"
 }, {
     symbol: "忍殺",
-    title: "SHINOBI EXECUTION",
+    annotation: "SHINOBI EXECUTION",
     color: "#FFFFFF"
 }, {
     symbol: "踏破",
-    title: "INNER REFLECTION CONQUERED",
+    annotation: "INNER REFLECTION CONQUERED",
     color: "#FFFFFF"
 }, {
     symbol: "厄憑",
-    title: "SINISTER BURDEN",
+    annotation: "SINISTER BURDEN",
     color: "#750025"
 }, {
     symbol: "厄払",
-    title: "BURDEN DISPELLED",
+    annotation: "BURDEN DISPELLED",
     color: "#FFFFFF"
 }, {
     symbol: "不死斬り",
-    title: "IMMORTALITY SEVERED",
+    annotation: "IMMORTALITY SEVERED",
     color: "#FFFFFF"
 }, {
     symbol: "冥助あり",
-    title: "UNSEEN AID",
+    annotation: "UNSEEN AID",
     color: "#A0C6FF" // approximate
 }, {
     symbol: "鬼仏見出",
-    title: "SCULPTOR'S IDOL FOUND",
+    annotation: "SCULPTOR'S IDOL FOUND",
     color: "#FFFFC0" // approximate
 }, {
     symbol: "竜咳快復",
-    title: "DRAGONROT HEALED",
+    annotation: "DRAGONROT HEALED",
     color: "#F0C6C8" // approximate
 }]
 
@@ -76,8 +76,8 @@ const TextOptions = (): ReactElement => {
             payload: newTextState.symbol
         })
         dispatchStore({
-            type: 'TITLE',
-            payload: newTextState.title
+            type: 'ANNOTATION',
+            payload: newTextState.annotation
         })
         dispatchStore({
             type: 'COLOR',
@@ -91,9 +91,9 @@ const TextOptions = (): ReactElement => {
             payload: e.target.value
         })
     }
-    const onTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const onAnnotationChange: ChangeEventHandler<HTMLInputElement> = (e) => {
         dispatchStore({
-            type: 'TITLE',
+            type: 'ANNOTATION',
             payload: e.target.value
         })
     }
@@ -107,14 +107,14 @@ const TextOptions = (): ReactElement => {
         <Option title="Text" childrenStyle={Styles.children}
             preset={
                 <select css={Styles.select} ref={selector} onChange={handleSelect}>
-                    {presets.map(preset => <option key={preset.title}>{preset.symbol}</option>)}
+                    {presets.map(preset => <option key={preset.annotation}>{preset.symbol}</option>)}
                 </select>
             }>
             <span>Symbol</span>
             <TextInput placeholder="" value={store.options.symbol} onChange={onSymbolChange} />
 
-            <span>Title</span>
-            <TextInput placeholder="" value={store.options.title} onChange={onTitleChange} />
+            <span>Annotation</span>
+            <TextInput placeholder="" value={store.options.annotation} onChange={onAnnotationChange} />
 
             <span>Color</span>
             <ColorInput value={store.options.color} onChange={onColorChange} />
