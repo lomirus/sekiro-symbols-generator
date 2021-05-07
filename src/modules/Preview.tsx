@@ -57,31 +57,46 @@ const Preview = (): ReactElement => {
     }
 
     function drawText(symbol: string, title: string, color: string) {
+        const symbols_top = (() => {
+            switch (symbol.length) {
+                case 1: return 320;
+                case 2: return 250;
+                default: return 144
+            }
+        })()
+
+        const symbol_size = (() => {
+            switch (symbol.length) {
+                case 1: return 360;
+                case 2: return 160;
+                default: return 120;
+            }
+        })()
+
+        const symbols_gap = (() => {
+            switch (symbol.length) {
+                default: return 20
+            }
+        })()
+
+        const text_top = symbols_top +
+            symbol_size * symbol.length +
+            symbols_gap * (symbol.length - 1) +  40
+
         ctx.fillStyle = color;
-        const fontSize = symbol.length === 1 ? 180 : 100
-        const top = store.options.height / 2 + symbol.length * fontSize / 2 - 24
-        drawSymbol(symbol, fontSize)
-        drawTitle(stretch(title), top)
-    }
+        ctx.textAlign = 'center'
+        ctx.textBaseline = 'top'
 
-    function drawSymbol(text: string, fontSize: number) {
         const fontFamily = ['symbol', '宋体']
-        ctx.font = `${fontSize}px ${fontFamily.map(name => `"${name}"`).join(',')}`
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'top'
-        let y = store.options.height / 2 - text.length * fontSize / 2 - 48
-        text.split('').forEach(symbol => {
-            ctx.fillText(symbol, store.options.width / 2, y)
-            y += fontSize
+        ctx.font = `${symbol_size}px ${fontFamily.map(name => `"${name}"`).join(',')}`
+        let symbol_top = symbols_top
+        symbol.split('').forEach(char => {
+            ctx.fillText(char, store.options.width / 2, symbol_top)
+            symbol_top += symbol_size + symbols_gap
         })
-    }
 
-    function drawTitle(title: string, top: number) {
-        const fontSize = 28
-        ctx.font = `${fontSize}px serif`
-        ctx.textAlign = 'center'
-        ctx.textBaseline = 'top'
-        ctx.fillText(title, store.options.width / 2, top)
+        ctx.font = `36px serif`
+        ctx.fillText(stretch(title), store.options.width / 2, text_top)
     }
 
     return (
