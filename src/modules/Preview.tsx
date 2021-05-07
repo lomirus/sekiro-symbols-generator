@@ -57,13 +57,14 @@ const Preview = (): ReactElement => {
     }
 
     function drawText(symbol: string, annotation: string, color: string) {
+        const ratio = store.options.height / 1080
         const symbols_top = (() => {
             switch (symbol.length) {
                 case 1: return 320;
                 case 2: return 250;
                 default: return 144
             }
-        })()
+        })() * ratio
 
         const symbol_size = (() => {
             switch (symbol.length) {
@@ -71,17 +72,17 @@ const Preview = (): ReactElement => {
                 case 2: return 160;
                 default: return 120;
             }
-        })()
+        })() * ratio
 
         const symbols_gap = (() => {
             switch (symbol.length) {
                 default: return 20
             }
-        })()
+        })() * ratio
 
         const text_top = symbols_top +
             symbol_size * symbol.length +
-            symbols_gap * (symbol.length - 1) +  40
+            symbols_gap * (symbol.length - 1) +  40 * ratio
 
         ctx.fillStyle = color;
         ctx.textAlign = 'center'
@@ -95,7 +96,7 @@ const Preview = (): ReactElement => {
             symbol_top += symbol_size + symbols_gap
         })
 
-        ctx.font = `36px serif`
+        ctx.font = `${36 / 1080 * store.options.height}px serif`
         ctx.fillText(stretch(annotation), store.options.width / 2, text_top)
     }
 
