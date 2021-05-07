@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom';
 
 import App from './App'
+import './assets/styles/index.css'
 import './assets/styles/fonts.css'
 
 const reactApp = document.querySelector('#react-app');
